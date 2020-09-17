@@ -1,5 +1,5 @@
 # 目的
-TodoTutorialを以前作成しているが、確認用+user情報（login/logout）を足すために再作成したもの。
+TodoTutorialを以前作成しているが、確認用+user情報（login/logout）を足すために再作成したもの。  
 docker desktopを使用してDBを動かすこと。
 
 
