@@ -8,6 +8,8 @@ services:
       - "${PHOENIX_PORT}:4001"
     environment:
       - PHOENIX_VERSION=${PHOENIX_VERSION}
+    depends_on:
+      - postgres
   postgres:
     build: ./dockerfiles/db
     volumes:
