@@ -5,13 +5,13 @@ defmodule TodoTutorial.Accounts do
     前に使用していたやつ。name, usernameが分からなくなったとき用
     def list_users do
       [
-        %User{id: "1", name: "Rita", username: "ritateto"},
-        %User{id: "2", name: "Tasuku", username: "kyleswim"},
-        %User{id: "3", name: "Maui", username: "kuunamaka"},
-        %User{id: "4", name: "Kanae", username: "mommy"},
-        %User{id: "5", name: "Myoku", username: "daddy"}
+        %User{name: "Rita", username: "ritarita"},
+        %User{name: "Tasuku", username: "kaleolani"},
+        %User{name: "Maui", username: "kuunamaka"}
       ]
     end
+
+    idに関しては、delete作業でバラバラなので、Repo.all(User)等で確認する
   """
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User

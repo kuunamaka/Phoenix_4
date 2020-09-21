@@ -11,6 +11,7 @@ defmodule TodoTutorial.Accounts.User do
     timestamps()
   end
 
+  # 新しいuser作成時のみに確認する事項
   def changeset(user, attrs) do # Accepts Accounts.User struct and attributes
     user
     |> cast(attrs, [:name, :username])
