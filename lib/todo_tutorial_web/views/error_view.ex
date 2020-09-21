@@ -13,4 +13,13 @@ defmodule TodoTutorialWeb.ErrorView do
   def template_not_found(template, _assigns) do
     Phoenix.Controller.status_message_from_template(template)
   end
+
+  # Adding the 404 and 500 error view
+  def render("404.html", _assigns) do
+    "Page Not Found"
+  end
+
+  def render("500.html", _assigns) do
+    "Internal Sever Error"
+  end
 end

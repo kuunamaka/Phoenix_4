@@ -1,2 +1,8 @@
 <h1>Showing User</h1>
-<%= render "user.html", user: @user %>
+<table>
+  <span><%= render "user.html", user: @user %></span>
+</table>
+
+<div>
+  <span><%= link "Tasks", to: Routes.task_path(@conn, :index) %></span>
+</div>
