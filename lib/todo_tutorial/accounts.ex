@@ -35,15 +35,24 @@ defmodule TodoTutorial.Accounts do
     Repo.all(User)
   end
 
-  # For new user
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
 
-  # Connecting new user to out controller
+  # Connecting the new user to out controller
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_user(%User{} = user) do
+    Repo.delete(user)
   end
 end
