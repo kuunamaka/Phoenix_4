@@ -43,7 +43,7 @@ defmodule TodoTutorialWeb.TaskController do
     case Todo.update_task(task, task_params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Task updated successfully.")
+        |> put_flash(:info, "Task is updated successfully!")
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->

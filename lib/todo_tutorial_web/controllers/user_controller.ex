@@ -37,22 +37,33 @@ defmodule TodoTutorialWeb.UserController do
 
   # Editing the existed user
   def edit(conn, %{"id" => id}) do
-    user = Repo.get(User, id)
+    user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get(User, id)
+    user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
 
-    case Repo.update(changeset) do
-      {:ok, user} ->
+    case Accounts.update_user(user, user_params) do
+      {:ok, _} ->
         conn
-        |> put_flash(:info, "#{user.name} is updated!")
+        |> put_flash(:info, "#{user.name} is updated successfully!")
         |> redirect(to: Routes.user_path(conn, :show, user.id))
+        
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
+  end
+
+  # Deleting the user
+  def delete(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    {:ok, _user} = Accounts.delete_user(user)
+
+    conn
+    |> put_flash(:info, "User deleted successfully.")
+    |> redirect(to: Routes.user_path(conn, :index))
   end
 end
