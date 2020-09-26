@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Is finished</th>
+      <!--<th>Assigned by</th>-->
       <th>Finished at</th>
 
       <th></th>
@@ -15,11 +16,14 @@
     <tr>
       <td><%= task.name %></td>
       <td><%= task.is_finished %></td>
+      <!--<th>task.assigned_by</th>-->
       <td><%= task.finished_at %></td>
 
       <td>
         <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
+        <span> | </span>
         <span><%= link "Edit", to: Routes.task_path(@conn, :edit, task) %></span>
+        <span> | </span>
         <span><%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
@@ -27,4 +31,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
+<span><%= link "Add a new task", to: Routes.task_path(@conn, :new) %></span>
