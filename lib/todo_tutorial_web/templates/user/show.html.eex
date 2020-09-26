@@ -4,5 +4,9 @@
 </table>
 
 <div>
-  <span><%= link "Tasks", to: Routes.task_path(@conn, :index) %></span>
+  <td>
+    <span><%= link "See all the tasks", to: Routes.task_path(@conn, :index) %></span>
+    <span> | </span>
+    <span><%= link "Add a new task", to: Routes.task_path(@conn, :new) %></span>
+  </td>
 </div>
