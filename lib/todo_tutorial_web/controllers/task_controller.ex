@@ -3,6 +3,8 @@ defmodule TodoTutorialWeb.TaskController do
 
   alias TodoTutorial.Todo
   alias TodoTutorial.Todo.Task
+  
+  plug :load_assigned when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do
     tasks = Todo.list_tasks()
@@ -58,5 +60,9 @@ defmodule TodoTutorialWeb.TaskController do
     conn
     |> put_flash(:info, "Task deleted successfully.")
     |> redirect(to: Routes.task_path(conn, :index))
+  end
+
+  def load_assigned(conn, _) do
+    assign(conn, :assigned, Todo.list_alphabetical_assigned())
   end
 end

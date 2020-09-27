@@ -16,10 +16,10 @@ defmodule TodoTutorialWeb.ErrorView do
 
   # Adding the 404 and 500 error view
   def render("404.html", _assigns) do
-    "Page Not Found"
+    "Not Found"
   end
 
   def render("500.html", _assigns) do
-    "Internal Sever Error"
+    "Internal Server Error"
   end
 end
