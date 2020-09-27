@@ -4,8 +4,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Is finished</th>
       <th>Assigned by</th>
+      <th>Is finished</th>
       <th>Finished at</th>
 
       <th></th>
