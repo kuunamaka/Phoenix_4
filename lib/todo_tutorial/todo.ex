@@ -112,7 +112,7 @@ defmodule TodoTutorial.Todo do
   # change1.ex
   # idの順番で並べる
   def alphabetical(query) do
-    from c in query, order_by: c.id
+    from c in query, order_by: c.name
   end
 
   def list_alphabetical_assigned do
