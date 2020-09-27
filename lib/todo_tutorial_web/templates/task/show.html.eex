@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Assigned by:</strong>
+    <%= @task.assign_id %>
+  </li>
+
+  <li>
     <strong>Is finished:</strong>
     <%= @task.is_finished %>
   </li>

@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Is finished</th>
-      <!--<th>Assigned by</th>-->
+      <th>Assigned by</th>
       <th>Finished at</th>
 
       <th></th>
@@ -15,8 +15,8 @@
 <%= for task <- @tasks do %>
     <tr>
       <td><%= task.name %></td>
+      <td><%= task.assign_id %></td>
       <td><%= task.is_finished %></td>
-      <!--<th>task.assigned_by</th>-->
       <td><%= task.finished_at %></td>
 
       <td>
