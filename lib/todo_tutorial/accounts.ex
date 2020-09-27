@@ -5,9 +5,9 @@ defmodule TodoTutorial.Accounts do
     前に使用していたやつ。name, usernameが分からなくなったとき用
     def list_users do
       [
+        %User{name: "Maui", username: "kuunamaka"},
         %User{name: "Rita", username: "ritarita"},
-        %User{name: "Tasuku", username: "kaleolani"},
-        %User{name: "Maui", username: "kuunamaka"}
+        %User{name: "Tasuku", username: "kaleolani"}
       ]
     end
 
