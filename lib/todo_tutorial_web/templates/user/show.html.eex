@@ -1,6 +1,7 @@
 <h1>Showing User</h1>
 <table>
   <span><%= render "user.html", user: @user %></span>
+  (<%= @user.id %>)
 </table>
 
 <div>
@@ -10,3 +11,5 @@
     <span><%= link "Add a new task", to: Routes.task_path(@conn, :new) %></span>
   </td>
 </div>
+
+<span><%= link "Back", to: Routes.user_path(@conn, :index) %></span>
