@@ -3,6 +3,7 @@ defmodule TodoTutorial.TodoTest do
   use ExUnit.Case, async: false
   
   alias TodoTutorial.Todo
+  alias TodoTutorial.Todo.Assign
   # ↓ tried to use it but couldn't work it out
   # import Mock
 
@@ -72,6 +73,22 @@ defmodule TodoTutorial.TodoTest do
     test "change_task/1 returns a task changeset" do
       task = task_fixture()
       assert %Ecto.Changeset{} = Todo.change_task(task)
+    end
+
+    # assigned_by test
+    test "list_alphabetical_assigned/0" do
+      for name <- ~w(Tasuku Rita Maui) do
+        Todo.create_assign!(name)
+      end
+
+      alpha_names =
+        for %Assign{name: name} <-
+          Todo.list_alphabetical_assigned() do
+        
+          name
+        end
+
+      assert alpha_names == ~w(Maui Rita Tasuku)
     end
   end
 end
