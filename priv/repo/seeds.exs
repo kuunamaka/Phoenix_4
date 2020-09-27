@@ -9,3 +9,9 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias TodoTutorial.Todo
+
+for assign <- ~w(Maui Tasuku Rita) do
+  Todo.create_assign!(assign)
+end
