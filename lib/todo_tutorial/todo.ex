@@ -103,7 +103,7 @@ defmodule TodoTutorial.Todo do
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
   end
-  
+
   # created assign function
   def create_assign!(name) do
     Repo.insert!(%Assign{name: name}, on_conflict: :nothing)
