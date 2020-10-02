@@ -3,7 +3,7 @@ defmodule TodoTutorialWeb.TaskController do
 
   alias TodoTutorial.Todo
   alias TodoTutorial.Todo.Task
-  
+
   plug :load_assigned when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do

@@ -30,6 +30,7 @@ defmodule TodoTutorialWeb.UserController do
         conn
         |> put_flash(:info, "#{user.name} created!")
         |> redirect(to: Routes.user_path(conn, :index))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -51,7 +52,7 @@ defmodule TodoTutorialWeb.UserController do
         conn
         |> put_flash(:info, "#{user.name} is updated successfully!")
         |> redirect(to: Routes.user_path(conn, :show, user.id))
-        
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
