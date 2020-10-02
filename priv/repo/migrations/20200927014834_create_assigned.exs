@@ -11,4 +11,3 @@ defmodule TodoTutorial.Repo.Migrations.CreateAssigned do
     create unique_index(:assigned, [:name])
   end
 end
-
