@@ -39,5 +39,10 @@ defmodule TodoTutorial.AccountsTest do
       assert %{username: ["should be at most 20 character(s)"]} = errors_on(changeset)
       assert Accounts.list_users() == []
     end
+
+    test "with a blank placeholder in a place of username" do
+      assert {:error, _changeset} = Accounts.create_user()
+      assert Accounts.list_users() == []
+    end
   end
 end
