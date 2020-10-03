@@ -1,12 +1,12 @@
-defmodule TodoTutorial.Todo do
+defmodule TodoTutorial.Todos do
   @moduledoc """
   The Todo context.
   """
 
   import Ecto.Query
   alias TodoTutorial.Repo
-  alias TodoTutorial.Todo.Assign
-  alias TodoTutorial.Todo.Task
+  alias TodoTutorial.Todos.Assignee
+  alias TodoTutorial.Todos.Task
 
   @doc """
   Returns the list of tasks.
@@ -93,9 +93,7 @@ defmodule TodoTutorial.Todo do
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_task(%Task{} = task) do
-    Repo.delete(task)
-  end
+  def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking task changes.
@@ -110,19 +108,19 @@ defmodule TodoTutorial.Todo do
     Task.changeset(task, attrs)
   end
   
-  # created assign function
+  @doc """
+  A function for creating a place for `assigned_by`.
+  """
   def create_assign!(name) do
-    Repo.insert!(%Assign{name: name}, on_conflict: :nothing)
+    Repo.insert!(%Assignee{name: name}, on_conflict: :nothing)
   end
 
-  # change1.ex
-  # idの順番で並べる
-  def alphabetical(query) do
+  defp alphabetical(query) do
     from c in query, order_by: c.name
   end
 
   def list_alphabetical_assigned do
-    Assign
+    Assignee
     |> alphabetical()
     |> Repo.all()
   end
