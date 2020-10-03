@@ -1,4 +1,4 @@
-defmodule TodoTutorial.Todo.Task do
+defmodule TodoTutorial.Todos.Task do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -7,7 +7,7 @@ defmodule TodoTutorial.Todo.Task do
     field :is_finished, :boolean, default: false
     field :name, :string
 
-    belongs_to :assign, TodoTutorial.Todo.Assign
+    belongs_to :assign, TodoTutorial.Todos.Assignee
 
     timestamps()
   end
