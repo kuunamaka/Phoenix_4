@@ -1,6 +1,4 @@
 defmodule TodoTutorial.Accounts.User do
-  # ↓ Defined user struct earlier 
-  # defstruct [:id, :name, :username]
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -11,8 +9,6 @@ defmodule TodoTutorial.Accounts.User do
     timestamps()
   end
 
-  # 新しいuser作成時のみに確認する事項
-  # Accepts Accounts.User struct and attributes
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :username])
