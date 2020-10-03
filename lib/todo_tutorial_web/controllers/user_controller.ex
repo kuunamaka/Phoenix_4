@@ -5,20 +5,17 @@ defmodule TodoTutorialWeb.UserController do
   alias TodoTutorial.Accounts.User
   alias TodoTutorial.Repo
 
-  # Creating the route to `index.html` page
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.html", users: users)
   end
 
-  # Creating `show` function to show the specific user (by their ids)
-  # Moving to `show.html` page
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user(id)
     render(conn, "show.html", user: user)
   end
 
-  # Adding a new user
   def new(conn, _params) do
     changeset = Accounts.change_user(%User{})
     render(conn, "new.html", changeset: changeset)
@@ -36,7 +33,6 @@ defmodule TodoTutorialWeb.UserController do
     end
   end
 
-  # Editing the existed user
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
@@ -58,7 +54,6 @@ defmodule TodoTutorialWeb.UserController do
     end
   end
 
-  # Deleting the user
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     {:ok, _user} = Accounts.delete_user(user)
