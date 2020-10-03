@@ -1,7 +1,7 @@
 defmodule TodoTutorial.TodoTest do
   use TodoTutorial.DataCase
   use ExUnit.Case, async: false
-  
+
   alias TodoTutorial.Todo
   alias TodoTutorial.Todo.Assign
   # ↓ tried to use it but couldn't work it out
@@ -83,8 +83,7 @@ defmodule TodoTutorial.TodoTest do
 
       alpha_names =
         for %Assign{name: name} <-
-          Todo.list_alphabetical_assigned() do
-        
+              Todo.list_alphabetical_assigned() do
           name
         end
 

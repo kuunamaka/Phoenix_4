@@ -12,7 +12,7 @@ defmodule TodoTutorial.AccountsTest do
     @invalid_attrs %{}
 
     test "with valid data inserts user" do
-      assert {:ok, %User{id: id}=user} = Accounts.create_user(@valid_attrs)
+      assert {:ok, %User{id: id} = user} = Accounts.create_user(@valid_attrs)
       assert user.name == "User"
       assert user.username == "testuser"
       assert [%User{id: ^id}] = Accounts.list_users()
@@ -27,8 +27,7 @@ defmodule TodoTutorial.AccountsTest do
       assert {:ok, %User{id: id}} = Accounts.create_user(@valid_attrs)
       assert {:error, changeset} = Accounts.create_user(@valid_attrs)
 
-      assert %{username: ["has already been taken"]} =
-        errors_on(changeset)
+      assert %{username: ["has already been taken"]} = errors_on(changeset)
 
       assert [%User{id: ^id}] = Accounts.list_users()
     end
@@ -37,8 +36,7 @@ defmodule TodoTutorial.AccountsTest do
       attrs = Map.put(@valid_attrs, :username, String.duplicate("a", 30))
       {:error, changeset} = Accounts.create_user(attrs)
 
-      assert %{username: ["should be at most 20 character(s)"]} =
-        errors_on(changeset)
+      assert %{username: ["should be at most 20 character(s)"]} = errors_on(changeset)
       assert Accounts.list_users() == []
     end
   end
