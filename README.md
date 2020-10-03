@@ -1,9 +1,5 @@
 # 目的
-TodoTutorial確認用+user情報を足したもの。  
-docker-desktopを使用してdocker-compose upをし、DBを動かすこと！
-
-
-`docker-compose` を使用すること。
+TodoTutorial確認用+user情報を足したもの
 
 # TodoTutorial
 
