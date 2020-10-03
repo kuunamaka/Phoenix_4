@@ -1,7 +1,7 @@
 defmodule TodoTutorialWeb.TaskControllerTest do
   use TodoTutorialWeb.ConnCase
 
-  alias TodoTutorial.Todo
+  alias TodoTutorial.Todos
 
   @create_attrs %{finished_at: ~N[2010-04-17 14:00:00], is_finished: true, name: "some name"}
   @update_attrs %{
@@ -11,8 +11,8 @@ defmodule TodoTutorialWeb.TaskControllerTest do
   }
   @invalid_attrs %{finished_at: nil, is_finished: nil, name: nil}
 
-  def fixture(:task) do
-    {:ok, task} = Todo.create_task(@create_attrs)
+  defp fixture(:task) do
+    {:ok, task} = Todos.create_task(@create_attrs)
     task
   end
 
