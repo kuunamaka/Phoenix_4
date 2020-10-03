@@ -15,7 +15,7 @@
     <%= for task <- @tasks do %>
       <tr>
         <td><%= task.name %></td>
-        <td><%= task.assign_id %></td> 
+        <td><%= task.assign.name %></td> 
         <td><%= task.is_finished %></td>
         <td><%= task.finished_at %></td>
 
