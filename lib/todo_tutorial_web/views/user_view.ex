@@ -3,10 +3,10 @@ defmodule TodoTutorialWeb.UserView do
 
   alias TodoTutorial.Accounts
 
-  # Splitting b/w its name's first and last
+  @doc """
+  Splitting between its name's first and last
+  """
   def first_name(%Accounts.User{name: name}) do
-    name
-    |> String.split(" ")
-    |> Enum.at(0)
+    hd([name])
   end
 end
