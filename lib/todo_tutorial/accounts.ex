@@ -1,8 +1,8 @@
 defmodule TodoTutorial.Accounts do
   @moduledoc """
-    THe Accounts context. Storing all the information of default users.
+  The Accounts context. Storing all the information of default users.
 
-    前に使用していたやつ。name, usernameが分からなくなったとき用
+  Just a quick note to remind the name and username
     def list_users do
       [
         %User{name: "Maui", username: "kuunamaka"},
@@ -11,36 +11,28 @@ defmodule TodoTutorial.Accounts do
       ]
     end
 
-    idに関しては、delete作業でバラバラなので、Repo.all(User)等で確認する
   """
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User
 
-  # Finding the user with their id
-  # Enum.find()を使ってidが一致するものを探す
-  def get_user(id) do
-    Repo.get(User, id)
-  end
+  @doc """
+  Function for finding the user with their id
+  """
+  def get_user(id), do: Repo.get(User, id)
 
-  def get_user!(id) do
-    Repo.get!(User, id)
-  end
+  @doc """
+  For matching list attributes
+  """
+  def get_user_by(params), do: Repo.get_by(User, params)
+  
+  def list_users, do: Repo.all(User)
 
-  # Matching list attributes
-  def get_user_by(params) do
-    Repo.get_by(User, params)
-  end
+  def change_user(%User{} = user), do: User.changeset(user, %{})
 
-  def list_users do
-    Repo.all(User)
-  end
-
-  def change_user(%User{} = user) do
-    User.changeset(user, %{})
-  end
-
-  # Connecting the new user to out controller
-  def create_user(attrs \\ %{}) do
+  @doc """
+  For connecting the new user to the controller 
+  """
+   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
@@ -52,7 +44,5 @@ defmodule TodoTutorial.Accounts do
     |> Repo.update()
   end
 
-  def delete_user(%User{} = user) do
-    Repo.delete(user)
-  end
+  def delete_user(%User{} = user), do: Repo.delete(user)
 end
