@@ -18,7 +18,6 @@ defmodule TodoTutorialWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    # , only: [:index, :show, :new, :create, :edit]
     resources "/users", UserController
     resources "/tasks", TaskController
   end
