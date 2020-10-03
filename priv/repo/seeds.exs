@@ -10,8 +10,6 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias TodoTutorial.Todo
+alias TodoTutorial.Todos
 
-for assign <- ~w(Maui Tasuku Rita) do
-  Todo.create_assign!(assign)
-end
+Enum.each(~w(Maui Tasuku Rita), &Todos.create_assign!(&1))
