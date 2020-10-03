@@ -15,7 +15,7 @@ defmodule TodoTutorial.Todo.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :assign_id, :is_finished])
+    |> cast(attrs, [:name, :assign_id, :is_finished]) 
     |> validate_required([:name, :is_finished])
     |> put_finished_at()
   end

@@ -18,7 +18,9 @@ defmodule TodoTutorial.Todo do
 
   """
   def list_tasks do
-    Repo.all(Task)
+    Task
+    |> preload([:assign])
+    |> Repo.all()
   end
 
   @doc """
@@ -35,7 +37,11 @@ defmodule TodoTutorial.Todo do
       ** (Ecto.NoResultsError)
 
   """
-  def get_task!(id), do: Repo.get!(Task, id)
+  def get_task!(id) do
+    Task
+    |> preload([:assign]) 
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a task.
@@ -103,7 +109,7 @@ defmodule TodoTutorial.Todo do
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
   end
-
+  
   # created assign function
   def create_assign!(name) do
     Repo.insert!(%Assign{name: name}, on_conflict: :nothing)
