@@ -6,16 +6,29 @@ defmodule TodoTutorialWeb.TaskController do
 
   plug :load_assigned when action in [:new, :create, :edit, :update]
 
+  @doc """
+  Renders index.html page with taking all tasks
+  """
   def index(conn, _params) do
     tasks = Todos.list_tasks()
     render(conn, "index.html", tasks: tasks)
   end
 
+  @doc """
+  Renders new.html page with change_task function
+  """
   def new(conn, _params) do
     changeset = Todos.change_task(%Task{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  @doc """
+  If it successed to create a new task, it'll go to 
+  index.html page.
+
+  And if it failed to create a new task, won't allow to create a new task
+  instead, it'll saty at the same page.
+  """
   def create(conn, %{"task" => task_params}) do
     case Todos.create_task(task_params) do
       {:ok, _} ->
@@ -28,17 +41,31 @@ defmodule TodoTutorialWeb.TaskController do
     end
   end
 
+  @doc """
+  Renders show.html page with details of id from get_task!(id)
+  """
   def show(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     render(conn, "show.html", task: task)
   end
 
+  @doc """
+  Renders edit.html page after edited its id-task
+  """
   def edit(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     changeset = Todos.change_task(task)
     render(conn, "edit.html", task: task, changeset: changeset)
   end
 
+  @doc """
+  When successfully updated the given task, it displays
+  "Task is updated successfully!" and
+  the page will back to its index.html page
+
+  If it failed to update,
+  it won't update the data and will go back to edit.html page
+  """
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todos.get_task!(id)
 
@@ -53,6 +80,9 @@ defmodule TodoTutorialWeb.TaskController do
     end
   end
 
+  @doc """
+  Deletes the task if only user clicked 
+  """
   def delete(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     {:ok, _task} = Todos.delete_task(task)
