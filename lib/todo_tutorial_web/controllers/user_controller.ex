@@ -3,8 +3,6 @@ defmodule TodoTutorialWeb.UserController do
 
   alias TodoTutorial.Accounts
   alias TodoTutorial.Accounts.User
-  alias TodoTutorial.Repo
-
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -12,7 +10,7 @@ defmodule TodoTutorialWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Accounts.get_user(id)
+    user = Accounts.get_user!(id)
     render(conn, "show.html", user: user)
   end
 
