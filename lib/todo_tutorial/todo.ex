@@ -1,11 +1,11 @@
 defmodule TodoTutorial.Todos do
   @moduledoc """
-  The Todo context.
+  The Todos context.
   """
 
   import Ecto.Query
   alias TodoTutorial.Repo
-  alias TodoTutorial.Todos.Assignee
+  alias TodoTutorial.Accounts.User
   alias TodoTutorial.Todos.Task
 
   @doc """
@@ -17,6 +17,7 @@ defmodule TodoTutorial.Todos do
       [%Task{}, ...]
 
   """
+  @spec list_tasks :: %Task{}
   def list_tasks do
     Task
     |> preload([:assign])
@@ -37,6 +38,7 @@ defmodule TodoTutorial.Todos do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_task!(integer) :: %Task{}
   def get_task!(id) do
     Task
     |> preload([:assign]) 
@@ -55,11 +57,10 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_task(string) :: %Task{}
   def create_task(attrs \\ %{}) do
     %Task{}
-    # %Ecto.Changeset{}へ変換
     |> Task.changeset(attrs)
-    # DBヘinsertする。{:ok, task} or {:error, changeset}を返す
     |> Repo.insert()
   end
 
@@ -75,6 +76,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_task(%Task{}, string) :: %Task{}
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
@@ -93,6 +95,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_task(%Task{}) :: Repo.delete()
   def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
@@ -104,23 +107,42 @@ defmodule TodoTutorial.Todos do
       %Ecto.Changeset{data: %Task{}}
 
   """
+  @spec change_task(%Task{}, %{}) :: Task.changeset()
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
   end
   
   @doc """
-  A function for creating a place for `assigned_by`.
+  Create a place for `assigned_by`.
+
+  ## Examples
+
+      iex> create_assign!(%{field: value})
+      {:ok, %Assignee{}}
+
   """
+  @spec create_assign!(string) :: %User{}
   def create_assign!(name) do
-    Repo.insert!(%Assignee{name: name}, on_conflict: :nothing)
+    Repo.insert!(%User{name: name}, on_conflict: :nothing)
   end
 
+  @doc """
+  A function that makes the order by its params name
+  """
   defp alphabetical(query) do
     from c in query, order_by: c.name
   end
 
+  @doc """
+  A function that lists the assignees as the alphabetical order by using alphabetical() private function
+
+  ## Examples
+      iex> list_alphabetical_assigned
+      %User{}
+  """
+  @spec list_alphabetical_assigned :: %User{}
   def list_alphabetical_assigned do
-    Assignee
+    User
     |> alphabetical()
     |> Repo.all()
   end
