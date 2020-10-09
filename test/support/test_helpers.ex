@@ -1,7 +1,7 @@
 defmodule TodoTutorial.TestHelpers do
   alias TodoTutorial.{
     Accounts,
-    Todo
+    Todos
   }
 
   # testing whether i can create a new todo task
@@ -13,6 +13,6 @@ defmodule TodoTutorial.TestHelpers do
         is_finished: true
       })
 
-    {:ok, task} = Todo.create_task(user, attrs)
+    {:ok, task} = Todos.create_task(user, attrs)
   end
 end
