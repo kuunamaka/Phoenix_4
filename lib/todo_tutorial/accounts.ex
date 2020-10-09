@@ -18,7 +18,7 @@ defmodule TodoTutorial.Accounts do
   @doc """
   Function for finding the user with their id
   """
-  def get_user(id), do: Repo.get(User, id)
+  def get_user!(id), do: Repo.get(User, id)
 
   @doc """
   For matching list attributes
