@@ -6,6 +6,8 @@ defmodule TodoTutorial.Accounts.User do
     field :name, :string
     field :username, :string
 
+    has_many :tasks, TodoTutorial.Todos.Task
+
     timestamps()
   end
 
