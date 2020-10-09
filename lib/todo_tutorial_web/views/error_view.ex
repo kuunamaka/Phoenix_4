@@ -14,11 +14,18 @@ defmodule TodoTutorialWeb.ErrorView do
     Phoenix.Controller.status_message_from_template(template)
   end
 
-  # Adding the 404 and 500 error view
+  @doc """
+  A function for redering `404.html` file and 
+  displaying "Not Found" page
+  """
   def render("404.html", _assigns) do
     "Not Found"
   end
 
+  @doc """
+  A function for redering `500.html` file and 
+  displaying "Internal Server Error" page
+  """
   def render("500.html", _assigns) do
     "Internal Server Error"
   end

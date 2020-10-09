@@ -5,6 +5,12 @@ defmodule TodoTutorialWeb.UserView do
 
   @doc """
   Splitting between its name's first and last
+
+  ## Examples
+    
+      iex> first_name("Maui Sahashi")
+      "Maui"
+
   """
   def first_name(%Accounts.User{name: name}) do
     hd([name])
