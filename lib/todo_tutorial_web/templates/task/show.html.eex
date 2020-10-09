@@ -9,7 +9,7 @@
 
   <li>
     <strong>Assigned by:</strong>
-    <%= @task.assign.name %>
+    <%= @task.assign && @task.assign.name %>
   </li>
 
   <li>
