@@ -7,8 +7,8 @@ defmodule TodoTutorial.Todos.Task do
     field :is_finished, :boolean, default: false
     field :name, :string
 
-    belongs_to :assign, TodoTutorial.Todos.Assignee
-
+    belongs_to :assign, TodoTutorial.Accounts.User
+    
     timestamps()
   end
 
