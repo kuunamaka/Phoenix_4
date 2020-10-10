@@ -2,6 +2,12 @@ defmodule TodoTutorial.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+    name: String.t(),
+    username: String.t()
+  }
+
+  @spec has_many(t) :: [t] | TodoTutorial.Todos.Task.t()
   schema "users" do
     field :name, :string
     field :username, :string
