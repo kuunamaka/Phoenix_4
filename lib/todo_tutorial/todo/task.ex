@@ -2,6 +2,13 @@ defmodule TodoTutorial.Todos.Task do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+    finished_at: naive_datetime(),
+    is_finished: boolean(),
+    name: String.t()
+  }
+
+  @spec belongs_to(t) :: t | TodoTutorial.Accounts.User.t()
   schema "tasks" do
     field :finished_at, :naive_datetime
     field :is_finished, :boolean, default: false
