@@ -3,10 +3,9 @@ defmodule TodoTutorial.Todos.Assignee do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    name: String.t(),
+    name: String.t()
   }
 
-  @spec has_many(t) :: [t] | TodoTutorial.Todos.Task.t()
   schema "assigned" do
     field :name, :string
 
