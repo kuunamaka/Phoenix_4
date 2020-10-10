@@ -57,7 +57,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_task(string) :: %Task{}
+  @spec create_task(String.t()) :: %Task{}
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
@@ -76,7 +76,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec update_task(%Task{}, string) :: %Task{}
+  @spec update_task(%Task{}, String.t()) :: %Task{}
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
@@ -121,7 +121,7 @@ defmodule TodoTutorial.Todos do
       {:ok, %Assignee{}}
 
   """
-  @spec create_assign!(string) :: %User{}
+  @spec create_assign!(String.t()) :: %User{}
   def create_assign!(name) do
     Repo.insert!(%User{name: name}, on_conflict: :nothing)
   end
