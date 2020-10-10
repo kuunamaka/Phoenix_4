@@ -36,7 +36,7 @@ defmodule TodoTutorial.Accounts do
       %User{}
 
   """
-  @spec get_user_by(string) :: %User{}
+  @spec get_user_by(String.t()) :: %User{}
   def get_user_by(params), do: Repo.get_by(User, params)
   
   @doc """
@@ -96,7 +96,7 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec update_user(%User{}, string) :: %User{}
+  @spec update_user(%User{}, String.t()) :: %User{}
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
