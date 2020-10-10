@@ -7,7 +7,6 @@ defmodule TodoTutorial.Accounts.User do
     username: String.t()
   }
 
-  @spec has_many(t) :: [t] | TodoTutorial.Todos.Task.t()
   schema "users" do
     field :name, :string
     field :username, :string
