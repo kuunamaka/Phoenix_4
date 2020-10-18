@@ -14,6 +14,8 @@ defmodule TodoTutorial.Todos.Task do
     field :name, :string
 
     belongs_to :assign, TodoTutorial.Accounts.User
+
+    many_to_many :users, TodoTutorial.Accounts.User, join_through: "task_users_relations"
     
     timestamps()
   end

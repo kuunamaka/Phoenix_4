@@ -6,6 +6,7 @@ defmodule TodoTutorial.Todos do
   import Ecto.Query
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User
+  alias TodoTutorial.Accounts
   alias TodoTutorial.Todos.Task
 
   @doc """
