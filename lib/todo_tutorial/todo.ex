@@ -118,13 +118,13 @@ defmodule TodoTutorial.Todos do
 
   ## Examples
 
-      iex> create_assign!(%{field: value})
+      iex> create_assign!(%{field: value, field: value})
       {:ok, %Assignee{}}
 
   """
-  @spec create_assign!(String.t()) :: %User{}
-  def create_assign!(name) do
-    Repo.insert!(%User{name: name}, on_conflict: :nothing)
+  @spec create_assign!(String.t(), String.t()) :: %User{}
+  def create_assign!(name, username) do
+    Repo.insert!(%User{name: name, username: username}, on_conflict: :nothing)
   end
 
   @doc """

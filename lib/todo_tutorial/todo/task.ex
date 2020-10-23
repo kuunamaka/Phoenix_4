@@ -15,7 +15,7 @@ defmodule TodoTutorial.Todos.Task do
 
     belongs_to :assign, TodoTutorial.Accounts.User
 
-    many_to_many :users, TodoTutorial.Accounts.User, join_through: "task_users_relations"
+    many_to_many :users, TodoTutorial.Accounts.User, join_through: "favorited_task"
     
     timestamps()
   end
