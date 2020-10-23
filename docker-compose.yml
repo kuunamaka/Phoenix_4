@@ -10,16 +10,18 @@ services:
       - PHOENIX_VERSION=${PHOENIX_VERSION}
     depends_on:
       - postgres
+    tty: true
+    stdin_open: true
   postgres:
     build: ./dockerfiles/db
-    volumes:
-      - ${DATA_PATH_HOST}/${COMPOSE_PROJECT_NAME}/postgres:/var/lib/postgresql/data
-    ports:
-      - "${POSTGRES_PORT}:5432"
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - es_postgres:/var/lib/postgresql/data
   swagger-ui:
     image: swaggerapi/swagger-ui
     volumes:
@@ -28,3 +30,6 @@ services:
       API_URL: ./swagger/swagger.json
     ports:
       - "${SWAGGER_UI_PORT}:8080"
+volumes:
+  es_postgres:
+    driver: "local"
