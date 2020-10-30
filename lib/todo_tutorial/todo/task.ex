@@ -3,10 +3,10 @@ defmodule TodoTutorial.Todos.Task do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    finished_at: :naive_datetime,
-    is_finished: boolean(),
-    name: String.t()
-  }
+          finished_at: :naive_datetime,
+          is_finished: boolean(),
+          name: String.t()
+        }
 
   schema "tasks" do
     field :finished_at, :naive_datetime
@@ -15,15 +15,15 @@ defmodule TodoTutorial.Todos.Task do
 
     belongs_to :assign, TodoTutorial.Accounts.User
 
-    many_to_many :users, TodoTutorial.Accounts.User, join_through: "favorited_task"
-    
+    many_to_many :users, TodoTutorial.Accounts.User, join_through: "favorited_tasks"
+
     timestamps()
   end
 
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :assign_id, :is_finished]) 
+    |> cast(attrs, [:name, :assign_id, :is_finished])
     |> validate_required([:name, :is_finished])
     |> put_finished_at()
   end
