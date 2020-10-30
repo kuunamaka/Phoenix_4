@@ -19,7 +19,9 @@ defmodule TodoTutorialWeb.Router do
 
     get "/", PageController, :index
     resources "/users", UserController
-    resources "/tasks", TaskController
+    resources "/tasks", TaskController do
+      resources "/favorited", FavoriteController
+    end 
   end
 
   # Other scopes may use custom stacks.
