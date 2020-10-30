@@ -8,6 +8,5 @@ defmodule TodoTutorial.Repo.Migrations.CreateFavoritedTask do
     end
 
     create unique_index(:favorited_tasks, [:user_id, :task_id])
-
   end
 end
