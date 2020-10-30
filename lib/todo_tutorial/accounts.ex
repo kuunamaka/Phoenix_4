@@ -12,6 +12,7 @@ defmodule TodoTutorial.Accounts do
     end
 
   """
+  import Ecto.Query
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User
 
@@ -38,7 +39,7 @@ defmodule TodoTutorial.Accounts do
   """
   @spec get_user_by(String.t()) :: %User{}
   def get_user_by(params), do: Repo.get_by(User, params)
-  
+
   @doc """
   For listing all the users
 
@@ -49,7 +50,11 @@ defmodule TodoTutorial.Accounts do
 
   """
   @spec list_users :: %User{}
-  def list_users, do: Repo.all(User)
+  def list_users do
+    User
+    |> preload([:tasks])
+    |> Repo.all()
+  end
 
   @doc """
   For changing the details/information of a user
@@ -78,7 +83,7 @@ defmodule TodoTutorial.Accounts do
 
   """
   @spec create_user(%{}) :: %User{}
-   def create_user(attrs \\ %{}) do
+  def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
