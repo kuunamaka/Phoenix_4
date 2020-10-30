@@ -8,6 +8,7 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Accounts.User
   alias TodoTutorial.Accounts
   alias TodoTutorial.Todos.Task
+  alias TodoTutorial.Todos.FavoritedTask
 
   @doc """
   Returns the list of tasks.
@@ -21,7 +22,7 @@ defmodule TodoTutorial.Todos do
   @spec list_tasks :: %Task{}
   def list_tasks do
     Task
-    |> preload([:assign])
+    |> preload([:assign, :users])
     |> Repo.all()
   end
 
@@ -42,7 +43,7 @@ defmodule TodoTutorial.Todos do
   @spec get_task!(integer) :: %Task{}
   def get_task!(id) do
     Task
-    |> preload([:assign]) 
+    |> preload([:assign, :users])
     |> Repo.get!(id)
   end
 
@@ -112,7 +113,7 @@ defmodule TodoTutorial.Todos do
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
   end
-  
+
   @doc """
   Create a place for `assigned_by`.
 
@@ -146,5 +147,20 @@ defmodule TodoTutorial.Todos do
     User
     |> alphabetical()
     |> Repo.all()
+  end
+
+  @doc """
+  Liking the task.
+
+  ## Examples
+
+      iex> favorite_task(%{task_id: 1, user_id: 1})
+      {:ok, %FavoritedTask{}}
+  
+  Need to add @spec create_favorite_task(integer, integer) :: %FavoritedTask{} as well
+  """
+ 
+  def create_favorite_task(task_id, user_id) do
+    Repo.insert(%FavoritedTask{task_id: task_id, user_id: user_id})
   end
 end
