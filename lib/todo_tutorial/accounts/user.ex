@@ -3,15 +3,15 @@ defmodule TodoTutorial.Accounts.User do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    name: String.t(),
-    username: String.t()
-  }
+          name: String.t(),
+          username: String.t()
+        }
 
   schema "users" do
     field :name, :string
     field :username, :string
 
-    many_to_many :tasks, TodoTutorial.Todos.Task, join_through: "favorited_task"
+    many_to_many :tasks, TodoTutorial.Todos.Task, join_through: "favorited_tasks"
 
     timestamps()
   end
