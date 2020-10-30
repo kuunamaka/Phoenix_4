@@ -7,7 +7,7 @@
       <th>Assigned by</th>
       <th>Is finished</th>
       <th>Finished at</th>
-      <th>Likes</th>
+      <th>Liked by</th>
 
       <th></th>
     </tr>
@@ -19,7 +19,7 @@
         <td><%= task.assign && task.assign.name %></td> 
         <td><%= task.is_finished %></td>
         <td><%= task.finished_at %></td>
-        <td><%=  %></td>
+        <td><%= length(task.users) %></td>
 
         <td>
           <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
