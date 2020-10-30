@@ -3,8 +3,8 @@ defmodule TodoTutorial.Todos.Assignee do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    name: String.t()
-  }
+          name: String.t()
+        }
 
   schema "assigned" do
     field :name, :string
