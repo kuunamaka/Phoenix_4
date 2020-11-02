@@ -1,6 +1,8 @@
 defmodule TodoTutorialWeb.Router do
   use TodoTutorialWeb, :router
+  alias UserController
   alias TaskController
+  alias FavoriteController
 
   pipeline :browser do
     plug :accepts, ["html"]
