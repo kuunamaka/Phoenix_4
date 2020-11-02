@@ -16,7 +16,7 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
   def create(conn, %{"task_id" => task_id}) do
     user = Accounts.get_user_by(name: "Maui")
     task = Todos.get_task!(task_id)
-    likes = Todos.create_favorite_task(task, user.id)
+    likes = Todos.create_favorite_task(task, user)
     render(conn, "index.html", task: task, likes: likes)
   end
 end
