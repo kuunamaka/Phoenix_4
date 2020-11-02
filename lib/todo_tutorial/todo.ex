@@ -156,11 +156,14 @@ defmodule TodoTutorial.Todos do
 
       iex> favorite_task(%{task_id: 1, user_id: 1})
       {:ok, %FavoritedTask{}}
+
+  Below worked with bare values of `favorite_controller`
+  Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
   
   Need to add @spec create_favorite_task(integer, integer) :: %FavoritedTask{} as well
   """
  
-  def create_favorite_task(task_id, user_id) do
-    Repo.insert(%FavoritedTask{task_id: task_id, user_id: user_id})
+  def create_favorite_task(task, user) do
+    Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
   end
 end
