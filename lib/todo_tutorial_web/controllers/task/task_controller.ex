@@ -3,6 +3,7 @@ defmodule TodoTutorialWeb.TaskController do
 
   alias TodoTutorial.Todos
   alias TodoTutorial.Todos.Task
+  alias TodoTutorial.Accounts
 
   plug :load_assigned when action in [:new, :create, :edit, :update]
 
@@ -11,7 +12,8 @@ defmodule TodoTutorialWeb.TaskController do
   """
   def index(conn, _params) do
     tasks = Todos.list_tasks()
-    render(conn, "index.html", tasks: tasks)
+    user = Accounts.get_user_by(name: "Maui")
+    render(conn, "index.html", tasks: tasks, user: user)
   end
 
   @doc """
