@@ -48,6 +48,26 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
+  Gets a single favorited task.
+
+  Raises `Ecto.NoResultsError` if the Task does not exist.
+
+  ## Examples
+
+      iex> get_fav_task!(123)
+      %FavoritedTask{}
+
+      iex> get_fav_task!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  @spec get_fav_task!(integer) :: %FavoritedTask{}
+  def get_fav_task!(id) do
+    FavoritedTask
+    |> Repo.get!(id)
+  end
+
+  @doc """
   Creates a task.
 
   ## Examples
@@ -154,16 +174,28 @@ defmodule TodoTutorial.Todos do
 
   ## Examples
 
-      iex> favorite_task(%{task_id: 1, user_id: 1})
+      iex> create_favorite_task(%{task_id: 1, user_id: 1})
       {:ok, %FavoritedTask{}}
 
-  Below worked with bare values of `favorite_controller`
-  Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
-  
-  Need to add @spec create_favorite_task(integer, integer) :: %FavoritedTask{} as well
   """
- 
+  @spec create_favorite_task(integer, integer) :: %FavoritedTask{}
   def create_favorite_task(task, user) do
     Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
+  end
+
+  @doc """
+  Unliking the task
+
+  ## Examples
+
+      iex> delete_favorite_task(%{id: 1})
+      {:ok, %FavoritedTask{}}
+
+  id = a primary key
+
+  """
+  @spec delete_favorite_task(integer) :: Repo.delete()
+  def delete_favorite_task(task) do
+    Repo.delete(%FavoritedTask{id: task.id})
   end
 end
