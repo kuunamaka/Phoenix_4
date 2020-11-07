@@ -21,6 +21,7 @@
         <td><%= task.is_finished %></td>
         <td><%= task.finished_at %></td>
         <td>
+        
         <!-- if user was "Maui", then `delete`, otherwise goes to `create` -->
           <%= if Enum.member?(task.users, @user) do %>
             <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}),
