@@ -23,7 +23,7 @@
   </li>
 
   <li>
-    <strong>Liked:</strong>
+    <strong>Likes:</strong>
     <%= length(@task.users) %>
   </li>
 

@@ -2,12 +2,13 @@
 
 <table>
   <thead>
+    <script src="https://kit.fontawesome.com/d9f1380ea4.js" crossorigin="anonymous"></script>
     <tr>
       <th>Name</th>
       <th>Assigned by</th>
       <th>Is finished</th>
       <th>Finished at</th>
-      <th>Liked by</th>
+      <th>Likes</th>
 
       <th></th>
     </tr>
@@ -19,7 +20,20 @@
         <td><%= task.assign && task.assign.name %></td> 
         <td><%= task.is_finished %></td>
         <td><%= task.finished_at %></td>
-        <td><%= length(task.users) %></td>
+        <td>
+        <!-- if user was "Maui", then `delete`, otherwise goes to `create` -->
+          <%= if Enum.member?(task.users, @user) do %>
+            <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}),
+              Routes.task_favorite_path(@conn, :delete, task.id, TodoTutorial.Todos.get_fav_task!(id)), fn f -> %>
+              <%= submit "", class: "far fa-heart" %><%= length(task.users) %>
+            <% end %>
+            <% else %>
+              <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}), 
+                Routes.task_favorite_path(@conn, :create, task.id), fn f -> %>
+                <%= submit "", class: "far fa-heart" %><%= length(task.users) %>
+              <% end %>
+          <% end %>
+        </td>
 
         <td>
           <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
