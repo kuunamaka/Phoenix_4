@@ -12,6 +12,7 @@ defmodule TodoTutorial.Todos.FavoritedTask do
   def changeset(favorited_task, attrs) do
     favorited_task
     |> cast(attrs, [:task_id, :user_id])
-    |> foreign_key_constraint(:task_id, :user_id)
+    |> foreign_key_constraint(:task_id)
+    |> foreign_key_constraint(:user_id)
   end
 end
