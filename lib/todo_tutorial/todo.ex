@@ -79,7 +79,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_task(String.t()) :: %Task{}
+  @spec create_task(String.t()) :: any
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
@@ -148,9 +148,6 @@ defmodule TodoTutorial.Todos do
     Repo.insert!(%User{name: name, username: username}, on_conflict: :nothing)
   end
 
-  @doc """
-  A function that makes the order by its params name
-  """
   defp alphabetical(query) do
     from c in query, order_by: c.name
   end
@@ -181,6 +178,15 @@ defmodule TodoTutorial.Todos do
   @spec create_favorite_task(integer, integer) :: %FavoritedTask{}
   def create_favorite_task(task, user) do
     Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
+  end
+
+  @doc """
+  Finding the FavoritedTask's id
+  """
+  def find_favorite_task(task_id, user_id) do
+    task = get_task!(task_id)
+    user = Accounts.get_user(user_id)
+    Repo.get_by!(FavoritedTask, %{task_id: task.id, user_id: user.id})
   end
 
   @doc """

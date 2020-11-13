@@ -1,8 +1,6 @@
 defmodule TodoTutorial.Todos.FavoritedTask do
   use Ecto.Schema
   import Ecto.Changeset
-  alias TodoTutorial.Todos.Task
-  alias TodoTutorial.Accounts.User
 
   schema "favorited_tasks" do
     belongs_to :task, TodoTutorial.Todos.Task
