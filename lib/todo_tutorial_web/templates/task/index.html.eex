@@ -25,7 +25,7 @@
           <%= if Enum.member?(task.users, @user) do %>
             <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(favtask(task.id, @user.id), %{}),
               Routes.task_favorite_path(@conn, :delete, task.id, favtask(task.id, @user.id).id), [method: "delete"], fn f -> %>
-              <%= submit "", class: "far fa-heart" %><%= length(task.users) %>
+              <%= submit "", class: "fas fa-heart" %><%= length(task.users) %>
             <% end %>
             <% else %>
               <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}),
