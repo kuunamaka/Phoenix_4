@@ -79,7 +79,8 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_task(String.t()) :: any
+  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
+          any
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
@@ -98,7 +99,10 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec update_task(%Task{}, String.t()) :: %Task{}
+  @spec update_task(
+          TodoTutorial.Todos.Task.t(),
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: any
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
@@ -175,7 +179,7 @@ defmodule TodoTutorial.Todos do
       {:ok, %FavoritedTask{}}
 
   """
-  @spec create_favorite_task(integer, integer) :: %FavoritedTask{}
+  @spec create_favorite_task(atom | %{id: any}, atom | %{id: any}) :: any
   def create_favorite_task(task, user) do
     Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
   end
@@ -183,6 +187,7 @@ defmodule TodoTutorial.Todos do
   @doc """
   Finding the FavoritedTask's id
   """
+  @spec find_favorite_task(integer, integer) :: any
   def find_favorite_task(task_id, user_id) do
     task = get_task!(task_id)
     user = Accounts.get_user(user_id)
@@ -200,7 +205,7 @@ defmodule TodoTutorial.Todos do
   id = a primary key
 
   """
-  @spec delete_favorite_task(integer) :: Repo.delete()
+  @spec delete_favorite_task(atom | %{id: any}) :: any
   def delete_favorite_task(task) do
     Repo.delete(%FavoritedTask{id: task.id})
   end

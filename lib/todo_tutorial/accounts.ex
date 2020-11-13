@@ -69,7 +69,7 @@ defmodule TodoTutorial.Accounts do
   def change_user(%User{} = user), do: User.changeset(user, %{})
 
   @doc """
-  For connecting the new user to the controller 
+  For connecting the new user to the controller
 
   double-back-slash is defining the default params for the input
 
@@ -101,7 +101,10 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec update_user(%User{}, String.t()) :: %User{}
+  @spec update_user(
+          TodoTutorial.Accounts.User.t(),
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: any
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
