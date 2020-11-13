@@ -9,6 +9,7 @@ mix test test/todo_tutorial/todo_test.exs
 
 # server up/down
 docker-compose up
+
 docker-compose down
 
 
