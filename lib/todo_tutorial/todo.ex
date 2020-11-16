@@ -10,6 +10,11 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Todos.Task
   alias TodoTutorial.Todos.FavoritedTask
 
+  @type t :: %Task{
+          finished_at: :naive_datetime,
+          is_finished: boolean(),
+          name: String.t()
+        }
   @doc """
   Returns the list of tasks.
 
@@ -19,7 +24,7 @@ defmodule TodoTutorial.Todos do
       [%Task{}, ...]
 
   """
-  @spec list_tasks :: %Task{}
+  @spec list_tasks :: Task.t()
   def list_tasks do
     Task
     |> preload([:assign, :users])
@@ -40,7 +45,7 @@ defmodule TodoTutorial.Todos do
       ** (Ecto.NoResultsError)
 
   """
-  @spec get_task!(integer) :: %Task{}
+  @spec get_task!(integer) :: Task.t()
   def get_task!(id) do
     Task
     |> preload([:assign, :users])
@@ -63,8 +68,7 @@ defmodule TodoTutorial.Todos do
   """
   @spec get_fav_task!(integer) :: %FavoritedTask{}
   def get_fav_task!(id) do
-    FavoritedTask
-    |> Repo.get!(id)
+    Repo.get!(FavoritedTask, id)
   end
 
   @doc """
@@ -152,8 +156,8 @@ defmodule TodoTutorial.Todos do
     Repo.insert!(%User{name: name, username: username}, on_conflict: :nothing)
   end
 
-  defp alphabetical(query) do
-    from c in query, order_by: c.name
+  defp ordered_name(query) do
+    order_by(query, asc: :name)
   end
 
   @doc """
@@ -166,7 +170,7 @@ defmodule TodoTutorial.Todos do
   @spec list_alphabetical_assigned :: %User{}
   def list_alphabetical_assigned do
     User
-    |> alphabetical()
+    |> ordered_name()
     |> Repo.all()
   end
 
@@ -179,7 +183,7 @@ defmodule TodoTutorial.Todos do
       {:ok, %FavoritedTask{}}
 
   """
-  @spec create_favorite_task(atom | %{id: any}, atom | %{id: any}) :: any
+  @spec create_favorite_task(atom | %{id: integer}, atom | %{id: integer}) :: %FavoritedTask{}
   def create_favorite_task(task, user) do
     Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
   end
