@@ -10,6 +10,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders index.html page with taking all tasks
   """
+  @spec index(any, any) :: none
   def index(conn, _params) do
     tasks = Todos.list_tasks()
     user = Accounts.get_user_by(name: "Maui")
@@ -25,7 +26,7 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   @doc """
-  If it successed to create a new task, it'll go to 
+  If it successed to create a new task, it'll go to
   index.html page.
 
   And if it failed to create a new task, won't allow to create a new task
@@ -83,7 +84,7 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   @doc """
-  Deletes the task if only user clicked 
+  Deletes the task if only user clicked
   """
   def delete(conn, %{"id" => id}) do
     task = Todos.get_task!(id)

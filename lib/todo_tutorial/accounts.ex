@@ -25,12 +25,12 @@ defmodule TodoTutorial.Accounts do
       %User{}
 
   """
-  @type u :: %User{
+  @type t :: %User{
           id: integer,
           name: String.t(),
           username: String.t()
         }
-  @spec get_user(integer) :: User.u()
+  @spec get_user(integer) :: User.t()
   def get_user(id), do: Repo.get(User, id)
 
   @doc """
@@ -42,7 +42,7 @@ defmodule TodoTutorial.Accounts do
       %User{}
 
   """
-  @spec get_user_by(String.t()) :: User.u()
+  @spec get_user_by(String.t()) :: User.t()
   def get_user_by(params), do: Repo.get_by(User, params)
 
   @doc """
@@ -54,7 +54,7 @@ defmodule TodoTutorial.Accounts do
       [%User{}, ...]
 
   """
-  @spec list_users :: User.u()
+  @spec list_users :: User.t()
   def list_users do
     User
     |> preload([:tasks])
@@ -70,7 +70,7 @@ defmodule TodoTutorial.Accounts do
       %Ecto.Changeset{data: %User{}}
 
   """
-  @spec change_user(User.u()) :: User.changeset()
+  @spec change_user(User.t()) :: Ecto.Changeset.t()
   def change_user(%User{} = user), do: User.changeset(user, %{})
 
   @doc """
@@ -87,7 +87,7 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_user(%{}) :: User.u()
+  @spec create_user(%{}) :: User.t()
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
@@ -107,7 +107,7 @@ defmodule TodoTutorial.Accounts do
 
   """
   @spec update_user(
-          User.u(),
+          User.t(),
           :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
         ) :: any
   def update_user(%User{} = user, attrs) do
@@ -128,6 +128,6 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec delete_user(User.t()) :: Repo.delete()
+  @spec delete_user(User.t()) :: any
   def delete_user(%User{} = user), do: Repo.delete(user)
 end
