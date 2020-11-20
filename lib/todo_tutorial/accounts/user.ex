@@ -17,8 +17,8 @@ defmodule TodoTutorial.Accounts.User do
   end
 
   @spec changeset(
-          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any()},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
         ) :: Ecto.Changeset.t()
   def changeset(user, attrs) do
     user

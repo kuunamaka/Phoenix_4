@@ -100,7 +100,7 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_user(any()) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
+  @spec create_user(%{}) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
@@ -122,7 +122,7 @@ defmodule TodoTutorial.Accounts do
   @spec update_user(
           User.t(),
           :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
-        ) :: any()
+        ) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
