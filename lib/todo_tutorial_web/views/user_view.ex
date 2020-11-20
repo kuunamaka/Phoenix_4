@@ -12,7 +12,7 @@ defmodule TodoTutorialWeb.UserView do
       "Maui"
 
   """
-  @spec first_name(TodoTutorial.Accounts.User.t()) :: any
+  @spec first_name(TodoTutorial.Accounts.User.t()) :: User.t()
   def first_name(%Accounts.User{name: name}) do
     hd([name])
   end
