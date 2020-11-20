@@ -137,7 +137,7 @@ defmodule TodoTutorial.Todos do
       %Ecto.Changeset{data: %Task{}}
 
   """
-  @spec change_task(%Task{}, %{}) :: Task.changeset()
+  @spec change_task(%Task{}, %{}) :: Ecto.Changeset.t()
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
   end
@@ -151,7 +151,7 @@ defmodule TodoTutorial.Todos do
       {:ok, %Assignee{}}
 
   """
-  @spec create_assign!(String.t(), String.t()) :: %User{}
+  @spec create_assign!(String.t(), String.t()) :: User.t()
   def create_assign!(name, username) do
     Repo.insert!(%User{name: name, username: username}, on_conflict: :nothing)
   end
@@ -167,7 +167,7 @@ defmodule TodoTutorial.Todos do
       iex> list_alphabetical_assigned
       %User{}
   """
-  @spec list_alphabetical_assigned :: %User{}
+  @spec list_alphabetical_assigned :: User.t()
   def list_alphabetical_assigned do
     User
     |> ordered_name()
@@ -183,9 +183,11 @@ defmodule TodoTutorial.Todos do
       {:ok, %FavoritedTask{}}
 
   """
-  @spec create_favorite_task(atom | %{id: integer}, atom | %{id: integer}) :: %FavoritedTask{}
+  @spec create_favorite_task(atom | %{id: any}, atom | %{id: any}) :: any
   def create_favorite_task(task, user) do
-    Repo.insert(%FavoritedTask{task_id: task.id, user_id: user.id})
+    %FavoritedTask{}
+    |> FavoritedTask.changeset(%{task_id: task.id, user_id: user.id})
+    |> Repo.insert()
   end
 
   @doc """

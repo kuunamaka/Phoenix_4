@@ -20,6 +20,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders new.html page with change_task function
   """
+  @spec new(Plug.Conn.t(), any) :: Plug.Conn.t()
   def new(conn, _params) do
     changeset = Todos.change_task(%Task{})
     render(conn, "new.html", changeset: changeset)
@@ -47,6 +48,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders show.html page with details of id from get_task!(id)
   """
+  @spec show(Plug.Conn.t(), map) :: Plug.Conn.t()
   def show(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     render(conn, "show.html", task: task)

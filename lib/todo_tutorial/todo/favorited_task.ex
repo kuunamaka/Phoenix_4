@@ -7,6 +7,10 @@ defmodule TodoTutorial.Todos.FavoritedTask do
     belongs_to :user, TodoTutorial.Accounts.User
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Ecto.Changeset.t()
   def changeset(favorited_task, attrs) do
     favorited_task
     |> cast(attrs, [:task_id, :user_id])

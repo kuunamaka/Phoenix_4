@@ -16,6 +16,11 @@ defmodule TodoTutorial.Accounts do
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User
 
+  @type t :: %User{
+          id: integer,
+          name: String.t(),
+          username: String.t()
+        }
   @doc """
   Function for finding the user with their id
 
@@ -25,11 +30,6 @@ defmodule TodoTutorial.Accounts do
       %User{}
 
   """
-  @type t :: %User{
-          id: integer,
-          name: String.t(),
-          username: String.t()
-        }
   @spec get_user(integer) :: User.t()
   def get_user(id), do: Repo.get(User, id)
 
@@ -87,7 +87,7 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_user(%{}) :: User.t()
+  @spec create_user(any) :: User.t()
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
