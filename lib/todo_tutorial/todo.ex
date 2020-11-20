@@ -79,7 +79,7 @@ defmodule TodoTutorial.Todos do
 
   """
   @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
-          any()
+          {:ok, Task.t()} | {:error, Ecto.Changeset.t()}
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
@@ -101,7 +101,7 @@ defmodule TodoTutorial.Todos do
   @spec update_task(
           TodoTutorial.Todos.Task.t(),
           :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
-        ) :: any()
+        ) :: {:ok, Task.t()} | {:error, Ecto.Changeset.t()}
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
@@ -120,7 +120,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec delete_task(%Task{}) :: any()
+  @spec delete_task(%Task{}) :: {:ok, Task.t()} | {:error, Ecto.Changeset.t()}
   def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
@@ -178,7 +178,8 @@ defmodule TodoTutorial.Todos do
       {:ok, %FavoritedTask{}}
 
   """
-  @spec create_favorite_task(Task.t(), User.t()) :: any()
+  @spec create_favorite_task(Task.t(), User.t()) ::
+          {:ok, FavoritedTask.t()} | {:error, Ecto.Changeset.t()}
   def create_favorite_task(task, user) do
     %FavoritedTask{}
     |> FavoritedTask.changeset(%{task_id: task.id, user_id: user.id})
@@ -188,7 +189,7 @@ defmodule TodoTutorial.Todos do
   @doc """
   Finding the FavoritedTask's id
   """
-  @spec find_favorite_task(integer, integer) :: any()
+  @spec find_favorite_task(integer, integer) :: FavoritedTask.t()
   def find_favorite_task(task_id, user_id) do
     task = get_task!(task_id)
     user = Accounts.get_user(user_id)
@@ -206,7 +207,8 @@ defmodule TodoTutorial.Todos do
   id = a primary key
 
   """
-  @spec delete_favorite_task(FavoritedTask.t()) :: any()
+  @spec delete_favorite_task(FavoritedTask.t()) ::
+          {:ok, FavoritedTask.t()} | {:error, Ecto.Changeset.t()}
   def delete_favorite_task(task) do
     Repo.delete(%FavoritedTask{id: task.id})
   end
