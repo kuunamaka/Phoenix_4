@@ -69,7 +69,7 @@ defmodule TodoTutorialWeb.UserController do
   If it failed to update,
   it won't update the data and will go back to edit.html page
   """
-  @spec update(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec update(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Accounts.get_user(id)
 
@@ -87,7 +87,7 @@ defmodule TodoTutorialWeb.UserController do
   @doc """
   Deletes the user if only user clicked
   """
-  @spec delete(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user(id)
     {:ok, _user} = Accounts.delete_user(user)

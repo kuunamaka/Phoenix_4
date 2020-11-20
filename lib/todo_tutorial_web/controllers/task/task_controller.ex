@@ -10,7 +10,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders index.html page with taking all tasks
   """
-  @spec index(Plug.Conn.t(), any) :: Plug.Conn.t()
+  @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
     tasks = Todos.list_tasks()
     user = Accounts.get_user_by_name(name: "Maui")
@@ -20,7 +20,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders new.html page with change_task function
   """
-  @spec new(Plug.Conn.t(), any) :: Plug.Conn.t()
+  @spec new(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def new(conn, _params) do
     changeset = Todos.change_task(%Task{})
     render(conn, "new.html", changeset: changeset)
@@ -33,7 +33,7 @@ defmodule TodoTutorialWeb.TaskController do
   And if it failed to create a new task, won't allow to create a new task
   instead, it'll saty at the same page.
   """
-  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"task" => task_params}) do
     case Todos.create_task(task_params) do
       {:ok, _} ->
@@ -49,7 +49,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders show.html page with details of id from get_task!(id)
   """
-  @spec show(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec show(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def show(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     render(conn, "show.html", task: task)
@@ -58,7 +58,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders edit.html page after edited its id-task
   """
-  @spec edit(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec edit(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def edit(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     changeset = Todos.change_task(task)
@@ -73,7 +73,7 @@ defmodule TodoTutorialWeb.TaskController do
   If it failed to update,
   it won't update the data and will go back to edit.html page
   """
-  @spec update(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec update(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todos.get_task!(id)
 
@@ -91,7 +91,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Deletes the task if only user clicked
   """
-  @spec delete(Plug.Conn.t(), map) :: Plug.Conn.t()
+  @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     {:ok, _task} = Todos.delete_task(task)
