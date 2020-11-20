@@ -75,7 +75,7 @@ defmodule TodoTutorial.TodosTest do
       assert %Ecto.Changeset{} = Todos.change_task(task)
     end
 
-    test "list_alphabetical_assigned/0" do
+    test "list_alphabetical_ordered_users/0" do
       Enum.each(~w(Maui Tasuku Rita), &Todos.create_assign!(&1))
 
       alpha_names = Enum.map(Todos.list_alphabetical_assigned(), & &1.name)
