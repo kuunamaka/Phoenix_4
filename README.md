@@ -1,17 +1,23 @@
-# phoenix-todo-tutorial
+# 目的
+TodoTutorial確認用+user情報を足したもの
 
-- 技術書典7「Phoenix入門 〜API構築からLiveViewまで〜」の開発環境構築用Dockerファイル
-- 詳細な手順は書籍「p.8 環境構築」をご参照ください
+# TodoTutorial
 
-## バージョン
+To start your Phoenix server:
 
-- Elixir  :1.8.1
-- Phoenix :1.4.9
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.setup`
+  * Install Node.js dependencies with `npm install` inside the `assets` directory
+  * Start Phoenix endpoint with `mix phx.server`
 
-## 正誤表
+Now you can visit [`localhost:4001`](http://localhost:4001) from your browser.
 
-書籍に下記の通り、誤りがございました。お詫びして訂正いたします。
+Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-ページ | 誤 | 正
-:-- | :-- | :--
-p.41 | mountではassing(socket, key: value)の形でテンプレートに渡す変数を書き、{:ok, socket}のタプルを返す | mountでは**assign**(socket, key: value)の形でテンプレートに渡す変数を書き、{:ok, socket}のタプルを返す
+## Learn more
+
+  * Official website: https://www.phoenixframework.org/
+  * Guides: https://hexdocs.pm/phoenix/overview.html
+  * Docs: https://hexdocs.pm/phoenix
+  * Forum: https://elixirforum.com/c/phoenix-forum
+  * Source: https://github.com/phoenixframework/phoenix

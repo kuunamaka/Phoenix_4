@@ -5,9 +5,11 @@ services:
     volumes:
       - ${APP_CODE_PATH_HOST}:/app
     ports:
-      - "${PHOENIX_PORT}:4000"
+      - "${PHOENIX_PORT}:4001"
     environment:
       - PHOENIX_VERSION=${PHOENIX_VERSION}
+    depends_on:
+      - postgres
   postgres:
     build: ./dockerfiles/db
     volumes:
