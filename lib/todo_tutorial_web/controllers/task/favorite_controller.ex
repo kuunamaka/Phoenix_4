@@ -11,9 +11,9 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
 
   l17; defining the regulated user for liking the task (user → "Maui")
   """
-  @spec create(any, map) :: none
+  @spec create(any(), map()) :: any()
   def create(conn, %{"task_id" => task_id}) do
-    user = Accounts.get_user_by(name: "Maui")
+    user = Accounts.get_user_by_name(name: "Maui")
     task = Todos.get_task!(task_id)
     Todos.create_favorite_task(task, user)
 
@@ -25,10 +25,10 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
   @doc """
   Deletes the like (must be the same user)
   """
-  @spec delete(any, map) :: any
+  @spec delete(any(), map()) :: any()
   def delete(conn, %{"id" => id}) do
-    task = Todos.get_fav_task!(id)
-    Todos.delete_favorite_task(task)
+    fav_task = Todos.get_fav_task!(id)
+    Todos.delete_favorite_task(fav_task)
 
     conn
     |> put_flash(:info, "Task unliked successfully.")

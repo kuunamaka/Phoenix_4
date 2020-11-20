@@ -10,10 +10,10 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders index.html page with taking all tasks
   """
-  @spec index(any, any) :: none
+  @spec index(Plug.Conn.t(), any) :: Plug.Conn.t()
   def index(conn, _params) do
     tasks = Todos.list_tasks()
-    user = Accounts.get_user_by(name: "Maui")
+    user = Accounts.get_user_by_name(name: "Maui")
     render(conn, "index.html", tasks: tasks, user: user)
   end
 
@@ -33,6 +33,7 @@ defmodule TodoTutorialWeb.TaskController do
   And if it failed to create a new task, won't allow to create a new task
   instead, it'll saty at the same page.
   """
+  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"task" => task_params}) do
     case Todos.create_task(task_params) do
       {:ok, _} ->
@@ -57,6 +58,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Renders edit.html page after edited its id-task
   """
+  @spec edit(Plug.Conn.t(), map) :: Plug.Conn.t()
   def edit(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     changeset = Todos.change_task(task)
@@ -71,6 +73,7 @@ defmodule TodoTutorialWeb.TaskController do
   If it failed to update,
   it won't update the data and will go back to edit.html page
   """
+  @spec update(Plug.Conn.t(), map) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todos.get_task!(id)
 
@@ -88,6 +91,7 @@ defmodule TodoTutorialWeb.TaskController do
   @doc """
   Deletes the task if only user clicked
   """
+  @spec delete(Plug.Conn.t(), map) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
     {:ok, _task} = Todos.delete_task(task)
@@ -98,6 +102,6 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   defp load_assigned(conn, _) do
-    assign(conn, :assigned, Todos.list_alphabetical_assigned())
+    assign(conn, :assigned, Todos.list_alphabetical_ordered_users())
   end
 end

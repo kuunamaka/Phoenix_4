@@ -16,11 +16,6 @@ defmodule TodoTutorial.Accounts do
   alias TodoTutorial.Repo
   alias TodoTutorial.Accounts.User
 
-  @type t :: %User{
-          id: integer,
-          name: String.t(),
-          username: String.t()
-        }
   @doc """
   Function for finding the user with their id
 
@@ -34,16 +29,34 @@ defmodule TodoTutorial.Accounts do
   def get_user(id), do: Repo.get(User, id)
 
   @doc """
-  For matching list attributes
+  For getting the specified user-info
 
   ## Examples
 
-      iex> get_user_by(name: "Maui")
-      %User{}
+      iex> get_user_by_id(id: 1)
+      %User{
+        id: 1,
+        name: "Maui"
+      }
 
   """
-  @spec get_user_by(String.t()) :: User.t()
-  def get_user_by(params), do: Repo.get_by(User, params)
+  @spec get_user_by_id(%{id: integer}) :: User.t()
+  def get_user_by_id(params), do: Repo.get_by(User, params)
+
+  @doc """
+  For matching list attributes (name)
+
+  ## Examples
+
+      iex> get_user_by_name(name: "Maui")
+      %User{
+        id: 1,
+        name: "Maui"
+      }
+
+  """
+  @spec get_user_by_name(name: String.t()) :: User.t()
+  def get_user_by_name(params), do: Repo.get_by(User, params)
 
   @doc """
   For listing all the users
@@ -57,7 +70,7 @@ defmodule TodoTutorial.Accounts do
   @spec list_users :: User.t()
   def list_users do
     User
-    |> preload([:tasks])
+    |> preload([:favorited_tasks])
     |> Repo.all()
   end
 
@@ -70,7 +83,7 @@ defmodule TodoTutorial.Accounts do
       %Ecto.Changeset{data: %User{}}
 
   """
-  @spec change_user(User.t()) :: Ecto.Changeset.t()
+  @spec change_user(%User{}) :: Ecto.Changeset.t()
   def change_user(%User{} = user), do: User.changeset(user, %{})
 
   @doc """
@@ -87,7 +100,7 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_user(any) :: User.t()
+  @spec create_user(any()) :: any()
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
@@ -108,8 +121,8 @@ defmodule TodoTutorial.Accounts do
   """
   @spec update_user(
           User.t(),
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
-        ) :: any
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
+        ) :: any()
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
@@ -128,6 +141,6 @@ defmodule TodoTutorial.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec delete_user(User.t()) :: any
+  @spec delete_user(User.t()) :: any()
   def delete_user(%User{} = user), do: Repo.delete(user)
 end

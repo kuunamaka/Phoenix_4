@@ -2,6 +2,11 @@ defmodule TodoTutorial.Todos.FavoritedTask do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{
+          task_id: integer,
+          user_id: integer
+        }
+
   schema "favorited_tasks" do
     belongs_to :task, TodoTutorial.Todos.Task
     belongs_to :user, TodoTutorial.Accounts.User

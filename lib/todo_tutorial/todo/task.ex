@@ -13,9 +13,9 @@ defmodule TodoTutorial.Todos.Task do
     field :is_finished, :boolean, default: false
     field :name, :string
 
-    belongs_to :assign, TodoTutorial.Accounts.User
+    belongs_to :assigned_user, TodoTutorial.Accounts.User, foreign_key: :assign_id
 
-    many_to_many :users, TodoTutorial.Accounts.User, join_through: "favorited_tasks"
+    many_to_many :favorited_users, TodoTutorial.Accounts.User, join_through: "favorited_tasks"
 
     timestamps()
   end

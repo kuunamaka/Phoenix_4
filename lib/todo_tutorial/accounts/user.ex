@@ -11,7 +11,7 @@ defmodule TodoTutorial.Accounts.User do
     field :name, :string
     field :username, :string
 
-    many_to_many :tasks, TodoTutorial.Todos.Task, join_through: "favorited_tasks"
+    many_to_many :favorited_tasks, TodoTutorial.Todos.Task, join_through: "favorited_tasks"
 
     timestamps()
   end

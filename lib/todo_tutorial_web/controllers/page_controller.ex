@@ -1,6 +1,7 @@
 defmodule TodoTutorialWeb.PageController do
   use TodoTutorialWeb, :controller
 
+  @spec index(Plug.Conn.t(), any) :: Plug.Conn.t()
   @doc """
   A function for rendering `index.html`
   """

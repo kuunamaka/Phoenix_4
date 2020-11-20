@@ -10,11 +10,6 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Todos.Task
   alias TodoTutorial.Todos.FavoritedTask
 
-  @type t :: %Task{
-          finished_at: :naive_datetime,
-          is_finished: boolean(),
-          name: String.t()
-        }
   @doc """
   Returns the list of tasks.
 
@@ -27,7 +22,7 @@ defmodule TodoTutorial.Todos do
   @spec list_tasks :: Task.t()
   def list_tasks do
     Task
-    |> preload([:assign, :users])
+    |> preload([:assigned_user, :favorited_users])
     |> Repo.all()
   end
 
@@ -48,7 +43,7 @@ defmodule TodoTutorial.Todos do
   @spec get_task!(integer) :: Task.t()
   def get_task!(id) do
     Task
-    |> preload([:assign, :users])
+    |> preload([:assigned_user, :favorited_users])
     |> Repo.get!(id)
   end
 
@@ -66,7 +61,7 @@ defmodule TodoTutorial.Todos do
       ** (Ecto.NoResultsError)
 
   """
-  @spec get_fav_task!(integer) :: %FavoritedTask{}
+  @spec get_fav_task!(integer) :: FavoritedTask.t()
   def get_fav_task!(id) do
     Repo.get!(FavoritedTask, id)
   end
@@ -83,8 +78,8 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
-          any
+  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
+          any()
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
@@ -105,8 +100,8 @@ defmodule TodoTutorial.Todos do
   """
   @spec update_task(
           TodoTutorial.Todos.Task.t(),
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
-        ) :: any
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
+        ) :: any()
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
@@ -125,7 +120,7 @@ defmodule TodoTutorial.Todos do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec delete_task(%Task{}) :: Repo.delete()
+  @spec delete_task(%Task{}) :: any()
   def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
@@ -156,7 +151,7 @@ defmodule TodoTutorial.Todos do
     Repo.insert!(%User{name: name, username: username}, on_conflict: :nothing)
   end
 
-  defp ordered_name(query) do
+  defp ordered_users(query) do
     order_by(query, asc: :name)
   end
 
@@ -164,13 +159,13 @@ defmodule TodoTutorial.Todos do
   A function that lists the assignees as the alphabetical order by using alphabetical() private function
 
   ## Examples
-      iex> list_alphabetical_assigned
+      iex> list_alphabetical_ordered_users
       %User{}
   """
-  @spec list_alphabetical_assigned :: User.t()
-  def list_alphabetical_assigned do
+  @spec list_alphabetical_ordered_users :: User.t()
+  def list_alphabetical_ordered_users do
     User
-    |> ordered_name()
+    |> ordered_users()
     |> Repo.all()
   end
 
@@ -183,7 +178,7 @@ defmodule TodoTutorial.Todos do
       {:ok, %FavoritedTask{}}
 
   """
-  @spec create_favorite_task(atom | %{id: any}, atom | %{id: any}) :: any
+  @spec create_favorite_task(Task.t(), User.t()) :: any()
   def create_favorite_task(task, user) do
     %FavoritedTask{}
     |> FavoritedTask.changeset(%{task_id: task.id, user_id: user.id})
@@ -193,7 +188,7 @@ defmodule TodoTutorial.Todos do
   @doc """
   Finding the FavoritedTask's id
   """
-  @spec find_favorite_task(integer, integer) :: any
+  @spec find_favorite_task(integer, integer) :: any()
   def find_favorite_task(task_id, user_id) do
     task = get_task!(task_id)
     user = Accounts.get_user(user_id)
@@ -211,7 +206,7 @@ defmodule TodoTutorial.Todos do
   id = a primary key
 
   """
-  @spec delete_favorite_task(atom | %{id: any}) :: any
+  @spec delete_favorite_task(FavoritedTask.t()) :: any()
   def delete_favorite_task(task) do
     Repo.delete(%FavoritedTask{id: task.id})
   end
