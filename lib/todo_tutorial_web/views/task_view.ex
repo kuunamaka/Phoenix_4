@@ -1,7 +1,8 @@
 defmodule TodoTutorialWeb.TaskView do
   use TodoTutorialWeb, :view
   alias TodoTutorial.Todos
-  alias TodoTutorial.Accounts
+  alias TodoTutorial.Todos.Task
+  alias TodoTutorial.Accounts.User
 
   @doc """
   A function for selecting the assigning user when adding a task
@@ -19,6 +20,10 @@ defmodule TodoTutorialWeb.TaskView do
     Todos.find_favorite_task(task_id, user_id)
   end
 
+  @doc """
+  Checking whether the task was favorited or not
+  """
+  @spec did_favorite?(Task.t(), User.t()) :: boolean()
   def did_favorite?(task, user) do
     Enum.member?(task.favorited_users, user)
   end
