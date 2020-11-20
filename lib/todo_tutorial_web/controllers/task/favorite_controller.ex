@@ -31,7 +31,7 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
     Todos.delete_favorite_task(fav_task)
 
     conn
-    |> put_flash(:info, "Task unliked successfully.")
+    |> put_flash(:error, "Task unliked successfully.")
     |> redirect(to: Routes.task_path(conn, :index))
   end
 end

@@ -47,7 +47,9 @@ defmodule TodoTutorialWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "User couldn't create successfully.")
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -80,7 +82,9 @@ defmodule TodoTutorialWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user.id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        conn
+        |> put_flash(:error, "#{user.name} coudn't update.")
+        |> render("edit.html", user: user, changeset: changeset)
     end
   end
 

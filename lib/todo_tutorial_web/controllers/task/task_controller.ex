@@ -42,7 +42,9 @@ defmodule TodoTutorialWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "Couldn't create task")
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -84,7 +86,9 @@ defmodule TodoTutorialWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset)
+        conn
+        |> put_flash(:error, "Task couldn't update")
+        |> render("edit.html", task: task, changeset: changeset)
     end
   end
 
