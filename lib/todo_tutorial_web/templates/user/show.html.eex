@@ -1,6 +1,7 @@
 <h1>Showing User</h1>
 <table>
-  <span><%= render "user.html", user: @user %></span>
+  <span><strong><%= @user.name %></strong></span>
+  (<%= @user.username %>)
   (<%= @user.id %>)
 </table>
 
