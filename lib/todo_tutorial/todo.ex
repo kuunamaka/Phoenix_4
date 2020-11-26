@@ -11,7 +11,7 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Todos.FavoritedTask
 
   @doc """
-  Returns the list of tasks.
+  Returns a list of tasks.
 
   ## Examples
 
@@ -22,7 +22,7 @@ defmodule TodoTutorial.Todos do
   @spec list_tasks :: Task.t()
   def list_tasks do
     Task
-    |> preload([:assigned_user, :favorited_users])
+    |> preload([:assignee, :favorited_users])
     |> Repo.all()
   end
 
@@ -43,7 +43,7 @@ defmodule TodoTutorial.Todos do
   @spec get_task!(integer) :: Task.t()
   def get_task!(id) do
     Task
-    |> preload([:assigned_user, :favorited_users])
+    |> preload([:assignee, :favorited_users])
     |> Repo.get!(id)
   end
 
@@ -138,12 +138,12 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
-  Create a place for `assigned_by`.
+  Create a place for `assignee`.
 
   ## Examples
 
       iex> create_assign!(%{field: value, field: value})
-      {:ok, %Assignee{}}
+      {:ok, %User{}}
 
   """
   @spec create_assign!(String.t(), String.t()) :: User.t()
@@ -156,7 +156,7 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
-  A function that lists the assignees as the alphabetical order by using alphabetical() private function
+  A function that lists users as the alphabetical order by using ordered_users() private function
 
   ## Examples
       iex> list_alphabetical_ordered_users

@@ -5,11 +5,11 @@ defmodule TodoTutorialWeb.TaskView do
   alias TodoTutorial.Accounts.User
 
   @doc """
-  A function for selecting the assigning user when adding a task
+  A function for selecting assignee when adding a task
   """
   @spec assign_select_options(any()) :: [any()]
-  def assign_select_options(assigned) do
-    for assign <- assigned, do: {assign.name, assign.id}
+  def assign_select_options(assignee) do
+    for assign <- assignee, do: {assign.name, assign.id}
   end
 
   @doc """

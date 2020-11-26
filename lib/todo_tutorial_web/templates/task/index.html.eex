@@ -17,7 +17,7 @@
     <%= for task <- @tasks do %>
       <tr>
         <td><%= task.name %></td>
-        <td><%= task.assigned_user && task.assigned_user.name %></td>
+        <td><%= task.assignee && task.assignee.name %></td>
         <td><%= task.is_finished %></td>
         <td><%= task.finished_at %></td>
         <td>
@@ -25,12 +25,14 @@
           <%= if did_favorite?(task, @user) do %>
             <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(favtask(task.id, @user.id), %{}),
               Routes.task_favorite_path(@conn, :delete, task.id, favtask(task.id, @user.id).id), [method: "delete"], fn _ -> %>
-              <%= submit "", class: "fas fa-heart" %><%= length(task.favorited_users) %>
+              <%= submit "", class: "fas fa-heart" %>
+              <%= length(task.favorited_users) %>
             <% end %>
             <% else %>
               <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}),
                 Routes.task_favorite_path(@conn, :create, task.id), fn _ -> %>
-                <%= submit "", class: "far fa-heart" %><%= length(task.favorited_users) %>
+                <%= submit "", class: "far fa-heart" %>
+                <%= length(task.favorited_users) %>
               <% end %>
           <% end %>
         </td>

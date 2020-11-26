@@ -9,8 +9,8 @@
   <%= text_input f, :name %>
   <%= error_tag f, :name %>
 
-  <%= label f, :assign_id, "Assigned by" %> 
-  <%= select f, :assign_id, assign_select_options(@assigned),
+  <%= label f, :assignee_id, "Assigned by" %>
+  <%= select f, :assignee_id, assign_select_options(@assignee),
     prompt: "Select name" %>
 
   <%= label f, :is_finished %>
