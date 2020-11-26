@@ -9,6 +9,8 @@ mix test test/todo_tutorial/todo_test.exs
 
 # github上のファイルの状態に戻す
 `$ git checkout HEAD -- .`
+(でも、変更させたくないファイルがあるときは`-- .` でなく
+　ファイル名に変えること)
 
 # server up/down
 docker-compose up
