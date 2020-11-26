@@ -7,6 +7,9 @@ docker-compose run app mix ecto.reset
 
 mix test test/todo_tutorial/todo_test.exs
 
+# github上のファイルの状態に戻す
+`$ git checkout HEAD -- .`
+
 # server up/down
 docker-compose up
 docker-compose down
