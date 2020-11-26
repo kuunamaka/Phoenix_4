@@ -8,7 +8,7 @@ defmodule TodoTutorialWeb.TaskController do
   plug :load_assigned when action in [:new, :create, :edit, :update]
 
   @doc """
-  Renders index.html page with taking all tasks
+  Renders index.html page with all tasks
   """
   @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
@@ -31,7 +31,7 @@ defmodule TodoTutorialWeb.TaskController do
   index.html page.
 
   And if it failed to create a new task, won't allow to create a new task
-  instead, it'll saty at the same page.
+  instead, it'll stay at the same page.
   """
   @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"task" => task_params}) do
@@ -58,7 +58,7 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   @doc """
-  Renders edit.html page after edited its id-task
+  Renders edit.html page after changeed id-specified task
   """
   @spec edit(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def edit(conn, %{"id" => id}) do
@@ -69,7 +69,7 @@ defmodule TodoTutorialWeb.TaskController do
 
   @doc """
   When successfully updated the given task, it displays
-  "Task is updated successfully!" and
+  "Task is updated successfully!" flash and
   the page will back to its index.html page
 
   If it failed to update,
@@ -93,7 +93,7 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   @doc """
-  Deletes the task if only user clicked
+  Deletes the task
   """
   @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
@@ -106,6 +106,6 @@ defmodule TodoTutorialWeb.TaskController do
   end
 
   defp load_assigned(conn, _) do
-    assign(conn, :assigned, Todos.list_alphabetical_ordered_users())
+    assign(conn, :assignee, Todos.list_alphabetical_ordered_users())
   end
 end
