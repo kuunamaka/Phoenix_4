@@ -13,7 +13,7 @@ defmodule TodoTutorial.Todos.Task do
     field :is_finished, :boolean, default: false
     field :name, :string
 
-    belongs_to :assigned_user, TodoTutorial.Accounts.User, foreign_key: :assigner_id
+    belongs_to :assignee, TodoTutorial.Accounts.User, foreign_key: :assignee_id
 
     many_to_many :favorited_users, TodoTutorial.Accounts.User, join_through: "favorited_tasks"
 
@@ -23,7 +23,7 @@ defmodule TodoTutorial.Todos.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:name, :assigner_id, :is_finished])
+    |> cast(attrs, [:name, :assignee_id, :is_finished])
     |> validate_required([:name, :is_finished])
     |> put_finished_at()
   end
