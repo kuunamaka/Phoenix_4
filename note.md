@@ -11,7 +11,20 @@ mix test test/todo_tutorial/todo_test.exs
 docker-compose up
 docker-compose down
 
+# button color
+/* like */
+.fas {
+  background-color: #e0245e;
+  border-color: #e0245e;
+}
 
+/* unlike */
+.far {
+  background-color: #bbbbbb;
+  border-color: #bbbbbb;
+}
+
+```elixir
 iex(6)> Repo.insert(%FavoritedTask{task_id: 3, user_id: 1})
 [debug] QUERY OK db=3.3ms decode=37.9ms queue=0.5ms idle=1969.0ms
 INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id" [3, 1]
@@ -24,8 +37,8 @@ INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id
    user: #Ecto.Association.NotLoaded<association :user is not loaded>,
    user_id: 1
  }}
-
-
+```
+```elixir
 # FavoritedTaskのidまで取得する
 iex(18)> favtask = TodoTutorial.Todos.get_fav_task!(9)
 [debug] QUERY OK source="favorited_tasks" db=0.9ms idle=1092.7ms
@@ -40,7 +53,8 @@ SELECT f0."id", f0."task_id", f0."user_id" FROM "favorited_tasks" AS f0 WHERE (f
 }
 iex(19)> favtask.id
 9
-
+```
+```elixir
 # FavoritedTaskのidまで取得する　その２
 iex(23)> fav_tasks = %FavoritedTask{id: 18}
 %TodoTutorial.Todos.FavoritedTask{
@@ -53,7 +67,8 @@ iex(23)> fav_tasks = %FavoritedTask{id: 18}
 }
 iex(24)> fav_tasks.id
 18
-
+```
+```elixir
 # Adding the changeset inside of create_favorite_task/2 function -> works
 iex(7)> defmodule Test do
 ...(7)>   def test(task, user) do
@@ -105,3 +120,4 @@ INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id
    user: #Ecto.Association.NotLoaded<association :user is not loaded>,
    user_id: 1
  }}
+```
