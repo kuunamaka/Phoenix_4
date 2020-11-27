@@ -14,11 +14,11 @@ defmodule TodoTutorialWeb.UserController do
   end
 
   @doc """
-  Renders show.html page with details of id from get_user(id)
+  Renders show.html page with details of id from get_user_by_id(id)
   """
   @spec show(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def show(conn, %{"id" => id}) do
-    user = Accounts.get_user(id)
+    user = Accounts.get_user_by_id(id)
     render(conn, "show.html", user: user)
   end
 
@@ -58,7 +58,7 @@ defmodule TodoTutorialWeb.UserController do
   """
   @spec edit(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def edit(conn, %{"id" => id}) do
-    user = Accounts.get_user(id)
+    user = Accounts.get_user_by_id(id)
     changeset = Accounts.change_user(user)
     render(conn, "edit.html", user: user, changeset: changeset)
   end
@@ -73,7 +73,7 @@ defmodule TodoTutorialWeb.UserController do
   """
   @spec update(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user(id)
+    user = Accounts.get_user_by_id(id)
 
     case Accounts.update_user(user, user_params) do
       {:ok, _} ->
@@ -93,7 +93,7 @@ defmodule TodoTutorialWeb.UserController do
   """
   @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def delete(conn, %{"id" => id}) do
-    user = Accounts.get_user(id)
+    user = Accounts.get_user_by_id(id)
     {:ok, _user} = Accounts.delete_user(user)
 
     conn

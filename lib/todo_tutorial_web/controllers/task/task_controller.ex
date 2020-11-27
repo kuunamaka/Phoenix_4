@@ -13,7 +13,7 @@ defmodule TodoTutorialWeb.TaskController do
   @spec index(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def index(conn, _params) do
     tasks = Todos.list_tasks()
-    user = Accounts.get_user_by_name(name: "Maui")
+    user = Accounts.get_user_by_name("Maui")
     render(conn, "index.html", tasks: tasks, user: user)
   end
 

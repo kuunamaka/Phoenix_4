@@ -13,7 +13,7 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
   """
   @spec create(any(), map()) :: any()
   def create(conn, %{"task_id" => task_id}) do
-    user = Accounts.get_user_by_name(name: "Maui")
+    user = Accounts.get_user_by_name("Maui")
     task = Todos.get_task!(task_id)
     Todos.create_favorite_task(task, user)
 

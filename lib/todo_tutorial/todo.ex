@@ -192,7 +192,7 @@ defmodule TodoTutorial.Todos do
   @spec find_favorite_task(integer, integer) :: FavoritedTask.t()
   def find_favorite_task(task_id, user_id) do
     task = get_task!(task_id)
-    user = Accounts.get_user(user_id)
+    user = Accounts.get_user_by_id(user_id)
     Repo.get_by!(FavoritedTask, %{task_id: task.id, user_id: user.id})
   end
 
