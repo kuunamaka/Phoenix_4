@@ -21,42 +21,27 @@ defmodule TodoTutorial.Accounts do
 
   ## Examples
 
-      iex> get_user!(1)
+      iex> get_user(1)
       %User{}
 
   """
-  @spec get_user(integer) :: User.t()
-  def get_user(id), do: Repo.get(User, id)
-
-  @doc """
-  For getting the specified user-info
-
-  ## Examples
-
-      iex> get_user_by_id(id: 1)
-      %User{
-        id: 1,
-        name: "Maui"
-      }
-
-  """
-  @spec get_user_by_id(%{id: integer}) :: User.t()
-  def get_user_by_id(params), do: Repo.get_by(User, params)
+  @spec get_user_by_id(integer) :: User.t()
+  def get_user_by_id(id), do: Repo.get(User, id)
 
   @doc """
   For matching list attributes (name)
 
   ## Examples
 
-      iex> get_user_by_name(name: "Maui")
+      iex> get_user_by_name("Maui")
       %User{
         id: 1,
         name: "Maui"
       }
 
   """
-  @spec get_user_by_name(name: String.t()) :: User.t()
-  def get_user_by_name(params), do: Repo.get_by(User, params)
+  @spec get_user_by_name(String.t()) :: User.t()
+  def get_user_by_name(name), do: Repo.get_by(User, name: name)
 
   @doc """
   For listing all the users
