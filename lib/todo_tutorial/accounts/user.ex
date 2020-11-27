@@ -3,19 +3,23 @@ defmodule TodoTutorial.Accounts.User do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    name: String.t(),
-    username: String.t()
-  }
+          name: String.t(),
+          username: String.t()
+        }
 
   schema "users" do
     field :name, :string
     field :username, :string
 
-    has_many :tasks, TodoTutorial.Todos.Task
+    many_to_many :favorited_tasks, TodoTutorial.Todos.Task, join_through: "favorited_tasks"
 
     timestamps()
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any()},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
+        ) :: Ecto.Changeset.t()
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :username])

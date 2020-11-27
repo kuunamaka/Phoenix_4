@@ -3,7 +3,7 @@ defmodule TodoTutorial.Repo.Migrations.AddAssignIdToTask do
 
   def change do
     alter table(:tasks) do
-      add :assign_id, references(:users) 
+      add :assignee_id, references(:users)
     end
   end
 end

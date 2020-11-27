@@ -9,7 +9,7 @@
 
   <li>
     <strong>Assigned by:</strong>
-    <%= @task.assign && @task.assign.name %>
+    <%= @task.assignee && @task.assignee.name %>
   </li>
 
   <li>
@@ -20,6 +20,11 @@
   <li>
     <strong>Finished at:</strong>
     <%= @task.finished_at %>
+  </li>
+
+  <li>
+    <strong>Likes:</strong>
+    <%= length(@task.favorited_users) %>
   </li>
 
 </ul>

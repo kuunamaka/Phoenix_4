@@ -11,5 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias TodoTutorial.Todos
+alias TodoTutorial.Accounts
+alias TodoTutorial.Accounts.User
 
-Enum.each(~w(Maui Tasuku Rita), &Todos.create_assign!(&1))
+TodoTutorial.Todos.create_assign!("Maui", "Kuunamaka")

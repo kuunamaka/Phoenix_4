@@ -1,5 +1,5 @@
 # 目的
-TodoTutorial確認用+user情報を足したもの
+TodoTutorial確認用+user情報+いいね機能
 
 # TodoTutorial
 

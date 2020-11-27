@@ -1,6 +1,8 @@
 defmodule TodoTutorialWeb.Router do
   use TodoTutorialWeb, :router
+  alias UserController
   alias TaskController
+  alias Task.FavoriteController
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,7 +21,9 @@ defmodule TodoTutorialWeb.Router do
 
     get "/", PageController, :index
     resources "/users", UserController
-    resources "/tasks", TaskController
+    resources "/tasks", TaskController do
+      resources "/favorited", FavoriteController, only: [:create, :delete]
+    end 
   end
 
   # Other scopes may use custom stacks.
