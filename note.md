@@ -126,3 +126,8 @@ INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id
    user_id: 1
  }}
 ```
+
+12/18
+atoms...Buefyで提供されるデザインを細かくコンポーネント化したものを配置する
+molecules...atomsのコンポーネントを組み合わせて作成する（vuexとやり取りをしないこと）
+organisms...atoms, moleculesのコンポーネントを組み合わせて作成する（ここでvuexとやり取りする）

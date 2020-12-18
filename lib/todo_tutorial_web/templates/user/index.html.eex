@@ -17,3 +17,5 @@
 </table>
 
 <span><%= link "Add a new user", to: Routes.user_path(@conn, :new) %></span>
+
+<div id="app"></div>
