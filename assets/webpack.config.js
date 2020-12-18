@@ -18,13 +18,12 @@ module.exports = (env, options) => {
       ]
     },
     entry: {
-      //'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
-      './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
+      'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
     },
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, '../priv/static/js'),
-      publicPath: '/js/'
+      publicPath: './../js/'
     },
     devtool: devMode ? 'eval-cheap-module-source-map' : undefined,
     module: {
