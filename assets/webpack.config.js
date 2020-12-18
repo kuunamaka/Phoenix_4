@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = (env, options) => {
   const devMode = options.mode !== 'production';
@@ -17,7 +18,8 @@ module.exports = (env, options) => {
       ]
     },
     entry: {
-      'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
+      //'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
+      './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
     },
     output: {
       filename: '[name].js',
@@ -41,13 +43,23 @@ module.exports = (env, options) => {
             'css-loader',
             'sass-loader',
           ],
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
         }
       ]
     },
+    resolve: {
+      extensions: ['.js', '.vue', '.json'],
+      alias: {
+        vue$: 'vue/dist/vue.esm.js',
+      }
+    },
     plugins: [
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-      new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
+      new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+      new VueLoaderPlugin()
     ]
-    .concat(devMode ? [new HardSourceWebpackPlugin()] : [])
   }
 };

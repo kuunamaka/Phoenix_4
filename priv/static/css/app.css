@@ -28,18 +28,6 @@ select {
   width: auto;
 }
 
-/* like */
-.fas {
-  background: #e0245e;
-  border-color: #e0245e;
-}
-
-/* unlike */
-.far {
-  background-color: #bbbbbb;
-  border-color: #bbbbbb;
-}
-
 /* Phoenix promo and logo */
 .phx-hero {
   text-align: center;
