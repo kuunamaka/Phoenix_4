@@ -16,14 +16,22 @@ defmodule TodoTutorialWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", TodoTutorialWeb.Api, as: :api do
+    pipe_through :api
+
+    resources "/tasks", TaskController
+    resources "/users", UserController
+  end
+
   scope "/", TodoTutorialWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+
     resources "/users", UserController
+
     resources "/tasks", TaskController do
       resources "/favorited", FavoriteController, only: [:create, :delete]
-    end 
+    end
   end
 
   # Other scopes may use custom stacks.
