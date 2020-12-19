@@ -1,23 +1,23 @@
 <template>
-  <div>
-    {{ title }}
-    <UserList />
-  </div>
+    <div class="body">
+      {{ text }}
+      <user-list />
+    </div>
 </template>
 
 <script>
-import UserList from './components/UserList.vue'
+import UserList from './components/UserList'
 
 export default {
-  name: 'app',
-  components: {
-    UserList
-  },
-  props: {
-    title: {
-      type: String,
-      default: 'Listing Users'
-    }
-  }
+   name: 'app',
+   props: {
+       text: {
+           type: String,
+           default: 'TodoTutorial Application'
+       }
+   },
+   components: {
+     UserList
+   }
 }
 </script>
