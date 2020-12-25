@@ -1,3 +1,6 @@
+# Accessing
+$ cd ~/Phoenix_4   
+
 # 目的
 TodoTutorial確認用+user情報+いいね機能
 
