@@ -1,3 +1,5 @@
+~/Phoenix_4
+
 docker-compose run app iex -S mix phx.server
 
 docker-compose run app mix ecto.migrate
