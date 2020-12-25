@@ -1,7 +1,7 @@
 <template>
-    <div class="body">
-      {{ text }}
-      <user-list />
+    <div>
+      <h1>{{ text }}</h1>
+      <user-list></user-list> <!-- just displaying -->
     </div>
 </template>
 
@@ -21,3 +21,8 @@ export default {
    }
 }
 </script>
+
+<style>
+  .button {
+  }
+</style>
