@@ -1,7 +1,5 @@
 defmodule TodoTutorialWeb.Router do
   use TodoTutorialWeb, :router
-  alias UserController
-  alias TaskController
   alias Task.FavoriteController
 
   pipeline :browser do
@@ -18,7 +16,7 @@ defmodule TodoTutorialWeb.Router do
 
   scope "/", TodoTutorialWeb do
     pipe_through :browser
-    get "/*path", PageController, :index
+    get "/", PageController, :index
 
     resources "/users", UserController
 
@@ -27,11 +25,11 @@ defmodule TodoTutorialWeb.Router do
     end
   end
 
-  scope "/api", TodoTutorialWeb.Api, as: :api do
+  scope "/api", TodoTutorialWeb, as: :api do
     pipe_through :api
 
-    resources "/tasks", TaskController
-    resources "/users", UserController
+    resources "/tasks", Api.TaskController
+    resources "/users", Api.UserController
   end
 
   # Other scopes may use custom stacks.

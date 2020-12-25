@@ -8,6 +8,7 @@ defmodule TodoTutorialWeb.Api.UserController do
 
   def index(conn, _params) do
     users = Accounts.list_users()
+    IO.inspect("aaaaa")
     render(conn, "index.json", users: users)
   end
 
