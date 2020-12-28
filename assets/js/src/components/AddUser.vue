@@ -25,8 +25,8 @@ export default {
       axios.post('/api/users', {
         headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
         data: {
-          name: { name: this.name },
-          username: { name: this.username }
+          name: this.name ,
+          username: this.username 
         }
       })
       .then(function (response) {

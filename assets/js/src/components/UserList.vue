@@ -5,15 +5,13 @@
     <user-detail></user-detail>
     <a href="/users/new" class="button">Add New User</a>
     <a href="/tasks" class="button">Task</a>
-    <task-list></task-list>
   </table>
 </template>
 
 <script>
 import UserDetail from './UserDetail'
-import TaskList from './TaskList'
 export default {
-  components: { UserDetail, TaskList },
+  components: { UserDetail },
   name: 'userList',
   data() {
     return {
