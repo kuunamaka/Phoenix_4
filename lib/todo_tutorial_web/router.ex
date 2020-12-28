@@ -12,6 +12,7 @@ defmodule TodoTutorialWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/", TodoTutorialWeb do

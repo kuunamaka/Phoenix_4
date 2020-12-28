@@ -1,21 +1,43 @@
 <template>
   <table>
     <h2>Adding Users</h2>
-    <div v-for="user in users" :key="user.id">
+    <div>
       <input v-model="name" placeholder="Name">
       <input v-model="username" placeholder="Username">
     </div>
-    <a href="/users" class="button">Create User</a> <!-- 作成したuser(DBに繋げる) -->
-    <a href="/users" class="button">Back to User list</a>
+    <button @click="createUser">Create User</button>
+    <a href="/users" class="button">Exit</a>
   </table>
 </template>
 
 <script>
+import api from '../api';
 export default {
-  name: 'userDetail',
+  name: 'addUser',
   data() {
     return {
-      users: null
+      name: '',
+      username: ''
+    }
+  },
+  methods: {
+    createUser() {
+      axios.post('/api/users', {
+        headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
+        data: {
+          name: { name: this.name },
+          username: { name: this.username }
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function() {
+        // always excecuted
+      });
     }
   },
   mounted() {
