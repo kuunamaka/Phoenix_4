@@ -24,10 +24,19 @@ export default {
     createUser() {
       axios.post('/api/users', {
         headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
-        data: {
-          name: this.name ,
-          username: this.username 
+        user: {
+          name: { name: this.name },
+          username: { username: this.username }
         }
+        // ,
+        // data: {
+        //   name: this.name ,
+        //   username: this.username 
+        // }
+        // ここわかんない
+        // name: { name: this.name },
+        // username: { username: this.username }
+        // どっちでやってもエラー出る
       })
       .then(function (response) {
         console.log(response);
