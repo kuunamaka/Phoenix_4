@@ -1,3 +1,4 @@
+<!-- adding a new user page -->
 <template>
   <table>
     <h2>Adding Users</h2>
@@ -11,7 +12,6 @@
 </template>
 
 <script>
-import api from '../api';
 export default {
   name: 'addUser',
   data() {
@@ -25,27 +25,18 @@ export default {
       axios.post('/api/users', {
         headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
         user: {
-          name: { name: this.name },
-          username: { username: this.username }
+          name: this.name,
+          username: this.username
         }
-        // ,
-        // data: {
-        //   name: this.name ,
-        //   username: this.username 
-        // }
-        // ここわかんない
-        // name: { name: this.name },
-        // username: { username: this.username }
-        // どっちでやってもエラー出る
       })
       .then(function (response) {
+        alert("User created successfully")
         console.log(response);
+        window.location.href = 'http://localhost:4001/users';
       })
       .catch(function (error) {
+        alert("Couldn't created user, please try again.")
         console.log(error);
-      })
-      .finally(function() {
-        // always excecuted
       });
     }
   },
