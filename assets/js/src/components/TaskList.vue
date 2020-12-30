@@ -11,7 +11,6 @@
       Likes: <b>{{ task.favorited_task }}</b>
       <!-- place the icon of likes -->
     </div>
-      <b>{{ tasks }}</b>
   </table>
 </template>
 
@@ -21,7 +20,7 @@ export default {
   name: 'taskList',
   data() {
     return {
-      tasks: null
+      tasks: []
     }
   },
   computed: {
@@ -32,7 +31,7 @@ export default {
   mounted() {
     axios
       .get('/api/tasks')
-      .then(response => (this.tasks = response.data))
+      .then(response => (this.tasks = response.data.data))
       .catch(error => console.log(error))
   }
 }
