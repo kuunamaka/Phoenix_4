@@ -27,6 +27,7 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
   """
   @spec delete(any(), map()) :: any()
   def delete(conn, %{"id" => id}) do
+    user = Accounts.get_user_by_name("Maui")
     fav_task = Todos.get_fav_task!(id)
     Todos.delete_favorite_task(fav_task)
 

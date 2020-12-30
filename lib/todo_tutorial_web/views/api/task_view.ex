@@ -11,6 +11,12 @@ defmodule TodoTutorialWeb.Api.TaskView do
   end
 
   def render("task.json", %{task: task}) do
-    %{id: task.id, asignee: task.assignee, name: task.name, is_finished: task.is_finished, finished_at: task.finished_at, favorited_users: task.favorited_users}
+    %{
+      id: task.id,
+      asignee: task.assignee,
+      name: task.name,
+      is_finished: task.is_finished,
+      finished_at: task.finished_at
+    }
   end
 end

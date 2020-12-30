@@ -1,8 +1,8 @@
 defmodule TodoTutorialWeb.Api.TaskControllerTest do
   use TodoTutorialWeb.ConnCase
 
-  alias TodoTutorial.Todo
-  alias TodoTutorial.Todo.Task
+  alias TodoTutorial.Todos
+  alias TodoTutorial.Todos.Task
 
   @create_attrs %{
 
@@ -13,7 +13,7 @@ defmodule TodoTutorialWeb.Api.TaskControllerTest do
   @invalid_attrs %{}
 
   def fixture(:task) do
-    {:ok, task} = Todo.create_task(@create_attrs)
+    {:ok, task} = Todos.create_task(@create_attrs)
     task
   end
 
