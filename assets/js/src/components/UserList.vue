@@ -1,21 +1,53 @@
-<!-- basement code for the listing user page -->
+<!-- listing all users --> <!-- and deleting user -->
 <template>
   <table>
     <h2>Listing Users</h2>
-    <user-detail></user-detail>
+    <div v-for="user in orderedUsers" :key="user.id">
+      id: <b>{{ user.id }}</b>,
+      name: <b>{{ user.name }}</b>,
+      username: <b>{{ user.username }}</b>
+      <a :href="`/users/${ user.id }`" class="button">Edit User</a>
+      <button @click="deleteUser(user)">Delete User</button>
+    </div>
     <a href="/users/new" class="button">Add New User</a>
     <a href="/tasks" class="button">Task</a>
   </table>
 </template>
 
 <script>
-import UserDetail from './UserDetail'
+import _ from 'lodash'
 export default {
-  components: { UserDetail },
   name: 'userList',
   data() {
     return {
-      users: null
+      name: '',
+      username: '',
+      users: []
+    }
+  },
+  computed: {
+    orderedUsers: function() {
+      return _.orderBy(this.users, 'name')
+    }
+  },
+  methods: {
+    deleteUser(user) {
+      axios.delete(`/api/users` + `/${ user.id }`, {
+        headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
+        user: {
+          name: this.name,
+          username: this.username
+        }
+      })
+      .then(function (response) {
+        alert("User deleted successfully")
+        console.log(response);
+        window.location.href = 'http://localhost:4001/users';
+      })
+      .catch(function (error) {
+        alert("Couldn't created user, please try again.")
+        console.log(error);
+      });
     }
   },
   mounted() {
