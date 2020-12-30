@@ -1,13 +1,19 @@
-~/Phoenix_4
+# the directories
+~/Phoenix_4   
 
-docker-compose run app iex -S mix phx.server
+# command
+`docker-compose run app iex -S mix phx.server`   
 
-docker-compose run app mix ecto.migrate
-docker-compose run app mix ecto.migrations
+`docker-compose run app mix ecto.migrate`   
+`docker-compose run app mix ecto.migrations`   
 
-docker-compose run app mix ecto.reset
+`docker-compose run app mix ecto.reset`   
 
-mix test test/todo_tutorial/todo_test.exs
+`mix test test/todo_tutorial/todo_test.exs`   
+
+# vscodeのファイル編集権限をuserにするとき
+`$ sudo chown -R [ユーザー名] ./`   
+`ls -la` で確認しておくのも大事！   
 
 # github上のファイルの状態に戻す
 `$ git checkout HEAD -- .`
@@ -15,10 +21,11 @@ mix test test/todo_tutorial/todo_test.exs
 　ファイル名に変えること)
 
 # server up/down
-docker-compose up
-docker-compose down
+`docker-compose up`   
+`docker-compose down`   
 
 # button color
+```css
 /* like */
 .fas {
   background-color: #e0245e;
@@ -30,6 +37,7 @@ docker-compose down
   background-color: #bbbbbb;
   border-color: #bbbbbb;
 }
+```
 
 ```elixir
 iex(6)> Repo.insert(%FavoritedTask{task_id: 3, user_id: 1})
@@ -129,13 +137,13 @@ INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id
  }}
 ```
 
-12/18
-atoms...Buefyで提供されるデザインを細かくコンポーネント化したものを配置する
-molecules...atomsのコンポーネントを組み合わせて作成する（vuexとやり取りをしないこと）
-organisms...atoms, moleculesのコンポーネントを組み合わせて作成する（ここでvuexとやり取りする）
+12/18   
+atoms...Buefyで提供されるデザインを細かくコンポーネント化したものを配置する   
+molecules...atomsのコンポーネントを組み合わせて作成する（vuexとやり取りをしないこと）   
+organisms...atoms, moleculesのコンポーネントを組み合わせて作成する（ここでvuexとやり取りする）   
 
-12/30
-./templates/task/index.html.eexの元
+12/30   
+./templates/task/index.html.eexの元   
 ```html
 <h1>Listing Tasks</h1>
 
