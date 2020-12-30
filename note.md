@@ -133,3 +133,62 @@ INSERT INTO "favorited_tasks" ("task_id","user_id") VALUES ($1,$2) RETURNING "id
 atoms...Buefyで提供されるデザインを細かくコンポーネント化したものを配置する
 molecules...atomsのコンポーネントを組み合わせて作成する（vuexとやり取りをしないこと）
 organisms...atoms, moleculesのコンポーネントを組み合わせて作成する（ここでvuexとやり取りする）
+
+12/30
+./templates/task/index.html.eexの元
+```html
+<h1>Listing Tasks</h1>
+
+<table>
+  <thead>
+    <script src="https://kit.fontawesome.com/d9f1380ea4.js" crossorigin="anonymous"></script>
+    <tr>
+      <th>Name</th>
+      <th>Assigned by</th>
+      <th>Is finished</th>
+      <th>Finished at</th>
+      <th>Likes</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for task <- @tasks do %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.assignee && task.assignee.name %></td>
+        <td><%= task.is_finished %></td>
+        <td><%= task.finished_at %></td>
+        <td>
+        <!-- if user was "Maui", then `delete`, otherwise goes to `create`/ fas=like/ far=unlike -->
+          <%= if did_favorite?(task, @user) do %>
+            <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(favtask(task.id, @user.id), %{}),
+              Routes.task_favorite_path(@conn, :delete, task.id, favtask(task.id, @user.id).id), [method: "delete"], fn _ -> %>
+              <%= submit "", class: "fas fa-heart" %>
+              <%= length(task.favorited_users) %>
+            <% end %>
+            <% else %>
+              <%= form_for TodoTutorial.Todos.FavoritedTask.changeset(%TodoTutorial.Todos.FavoritedTask{}, %{task_id: task.id, user_id: @user.id}),
+                Routes.task_favorite_path(@conn, :create, task.id), fn _ -> %>
+                <%= submit "", class: "far fa-heart" %>
+                <%= length(task.favorited_users) %>
+              <% end %>
+          <% end %>
+        </td>
+
+        <td>
+          <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
+          <span> | </span>
+          <span><%= link "Edit", to: Routes.task_path(@conn, :edit, task) %></span>
+          <span> | </span>
+          <span><%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= link "Add a new task", to: Routes.task_path(@conn, :new) %></span>
+<span> | </span>
+<span><%= link "See all the users", to: Routes.user_path(@conn, :index) %></span>
+```

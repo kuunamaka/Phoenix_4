@@ -1,4 +1,4 @@
-<!-- listing all users --> <!-- and deleting user -->
+<!-- listing all users --> <!-- and feature for deleting user -->
 <template>
   <table>
     <h2>Listing Users</h2>
@@ -22,12 +22,12 @@ export default {
     return {
       name: '',
       username: '',
-      users: []
+      users: null
     }
   },
   computed: {
     orderedUsers: function() {
-      return _.orderBy(this.users, 'name')
+      return _.orderBy(this.users, 'id')
     }
   },
   methods: {
