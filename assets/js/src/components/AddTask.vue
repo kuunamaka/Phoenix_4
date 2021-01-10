@@ -5,7 +5,7 @@
     <div>
       <div>
         Name
-        <input v-model="name">
+        <input v-model="task_name">
       </div>
       <div>
         Assigned by:
@@ -31,7 +31,7 @@ export default {
   name: 'addTask',
   data() {
     return {
-      name: '',
+      task_name: '',
       selected: '',
       is_finished: false,
       tasks: null
@@ -42,7 +42,7 @@ export default {
       axios.post('/api/tasks', {
         headers: { 'x-csrf-token': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
         task: {
-          name: this.name,
+          name: this.task_name,
           is_finished: this.is_finished,
           assignee_id: this.selected
         }

@@ -13,7 +13,7 @@ defmodule TodoTutorialWeb.Api.TaskView do
     %{
       id: task.id,
       name: task.name,
-      assignee: task.assignee && task.assignee.name,
+      assignee: task.assignee.name,
       is_finished: task.is_finished,
       finished_at: task.finished_at,
       favorited_num: length(task.favorited_users),

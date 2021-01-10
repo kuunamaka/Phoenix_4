@@ -12,6 +12,7 @@
       <input v-model="username" placeholder="new username">
       <button @click="updateUser(users)">Update User</button>
     </div>
+    <a href="/users" class="button">Exit</a>
   </table>
 </template>
 
