@@ -12,7 +12,7 @@
         <select v-model="selected">
           <option disabled>Please select one</option>
           <option v-for="task in tasks" :key="task.id">
-            {{ task.assignee }}
+            {{ task.assignee_id }} <!-- && task.assignee }} -->
           </option>
         </select>
       </div>
@@ -44,7 +44,7 @@ export default {
         task: {
           name: this.name,
           is_finished: this.is_finished,
-          assignee: this.selected
+          assignee_id: this.selected
         }
       })
       .then(function (response) {

@@ -19,6 +19,7 @@ defmodule TodoTutorialWeb.Api.TaskView do
       favorited_num: length(task.favorited_users),
       favorited_users: render_many(task.favorited_users, TodoTutorialWeb.Api.FavoriteView, "empty.json", as: :favorited_users),
       is_liked: TodoTutorial.Todos.favorite_status(task),
+      assignee_id: task.assignee_id
     }
   end
 end
