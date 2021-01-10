@@ -21,7 +21,7 @@ defmodule TodoTutorialWeb.TaskView do
   end
 
   @doc """
-  Checking whether the task was favorited or not
+  Checking whether the task was favored or not
   """
   @spec did_favorite?(Task.t(), User.t()) :: boolean()
   def did_favorite?(task, user) do

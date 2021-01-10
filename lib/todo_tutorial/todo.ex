@@ -198,18 +198,20 @@ defmodule TodoTutorial.Todos do
 
   @doc """
   Unliking the task
-
-  ## Examples
-
-      iex> delete_favorite_task(%{id: 1})
-      {:ok, %FavoritedTask{}}
-
-  id = a primary key
-
   """
-  @spec delete_favorite_task(FavoritedTask.t()) ::
+  @spec delete_favorite_task(integer, User.t()) ::
           {:ok, FavoritedTask.t()} | {:error, Ecto.Changeset.t()}
-  def delete_favorite_task(task) do
-    Repo.delete(%FavoritedTask{id: task.id})
+  def delete_favorite_task(task_id, user) do
+    favorited_task = Repo.one(FavoritedTask |> where(task_id: ^task_id, user_id: ^user.id))
+    Repo.delete(favorited_task)
+  end
+
+  @doc """
+  Checking whether the task was favored or not
+  """
+  def favorite_status(task) do
+    user = Accounts.get_user_by_name("Maui")
+    query = FavoritedTask |> where(task_id: ^task.id, user_id: ^user.id)
+    Repo.exists?(query)
   end
 end

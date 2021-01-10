@@ -1,15 +1,15 @@
-<!-- listing all users --> <!-- and feature for deleting user -->
+<!-- listing all users --> <!-- and feature for deleting the user -->
 <template>
   <table>
     <h2>Listing Users</h2>
-    <div v-for="user in orderedUsers" :key="user.id">
+    <li v-for="user in orderedUsers" :key="user.id">
       id: <b>{{ user.id }}</b>,
       name: <b>{{ user.name }}</b>,
       username: <b>{{ user.username }}</b>
       <a :href="`/users/${ user.id }`" class="button">Edit User</a>
       <button @click="deleteUser(user)">Delete User</button>
-    </div>
-    <a href="/users/new" class="button">Add New User</a>
+    </li>
+    <a href="/users/new" class="button">Add User</a>
     <a href="/tasks" class="button">Task</a>
   </table>
 </template>

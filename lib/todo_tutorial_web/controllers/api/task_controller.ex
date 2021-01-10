@@ -14,6 +14,7 @@ defmodule TodoTutorialWeb.Api.TaskController do
   def create(conn, %{"task" => task_params}) do
     with {:ok, %Task{} = task} <- Todos.create_task(task_params) do
       conn
+      |> IO.inspect(task)
       |> put_status(:created)
       |> put_resp_header("location", Routes.api_task_path(conn, :show, task))
       |> render("show.json", task: task)

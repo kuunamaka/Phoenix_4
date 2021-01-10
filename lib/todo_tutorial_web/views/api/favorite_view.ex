@@ -4,4 +4,10 @@ defmodule TodoTutorialWeb.Api.FavoriteView do
   def render("empty.json", _) do
     %{}
   end
+
+  def render("empty.json", %{favorited_users: favorited_users}) do
+    %{
+      id: favorited_users.id
+    }
+  end
 end

@@ -21,16 +21,14 @@ defmodule TodoTutorialWeb.Router do
 
     resources "/users", UserController
 
-    resources "/tasks", TaskController do
-      resources "/favorited", FavoriteController, only: [:create, :delete]
-    end
+    resources "/tasks", TaskController
   end
 
   scope "/api", TodoTutorialWeb, as: :api do
     pipe_through :api
 
     resources "/tasks", Api.TaskController do
-      resources "/favorited", Api.FavoriteController, only: [:create, :delete]
+      resources "/users", Api.FavoriteController, only: [:create, :delete]
     end
     resources "/users", Api.UserController
   end

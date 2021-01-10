@@ -1,7 +1,1 @@
-<h1>New Task</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.task_path(@conn, :create)) %>
-
-<span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>
-<div>
-<span><%= link "Add a new user", to: Routes.user_path(@conn, :new) %></span>
+<add-task />
