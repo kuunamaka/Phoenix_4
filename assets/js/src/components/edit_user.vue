@@ -32,17 +32,15 @@ export default {
   methods: {
     async updateUser(user) {
       try {
-        const resp = await axios.put('/api/users' + `/${ user.id }`, {
+        await axios.put('/api/users' + `/${ user.id }`, {
           user: {
             name: this.name,
             username: this.username
           }
         })
-        console.log(resp);
         window.location.href = '/users';
       }
       catch (e) {
-        console.log(e)
       }
     }
   },
@@ -53,7 +51,6 @@ export default {
       this.user = resp.data
     }
     catch (e) {
-      console.log(e)
     }
   }
 }

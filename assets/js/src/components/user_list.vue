@@ -36,7 +36,6 @@ export default {
       this.users = resp.data.users
     }
     catch (e) {
-      console.log(e)
     }
   }
 }

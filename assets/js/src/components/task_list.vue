@@ -38,32 +38,28 @@ export default {
   methods: {
     async createLike(task){
       try {
-        const resp = await axios.post(`/api/tasks` + `/${ task.id }` + `/users`, {
+        await axios.post(`/api/tasks` + `/${ task.id }` + `/users`, {
           task: {
             name: this.name,
             id: this.id
           }
         })
-        console.log(resp);
         window.location.href = '/tasks';
       }
       catch (e) {
-        console.log(e)
       }
     },
     async deleteLike(task){
       try {
-        const resp = await axios.delete(`/api/tasks` + `/${ task.id }` + `/users` + `/1`, {
+        await axios.delete(`/api/tasks` + `/${ task.id }` + `/users` + `/1`, {
           task: {
             name: this.name,
             id: this.id
           }
         })
-        console.log(resp);
         window.location.href = '/tasks';
       }
       catch (e) {
-        console.log(e)
       }
     }
   },  
@@ -72,7 +68,6 @@ export default {
       const resp = await axios.get('/api/tasks')
       this.tasks = resp.data.tasks
     } catch (e) {
-      console.log(e)
     }
   }
 }

@@ -14,17 +14,15 @@ export default {
   methods: {
     async deleteUser(user) {
       try {
-        const resp = await axios.delete(`/api/users` + `/${ user.id }`, {
+        await axios.delete(`/api/users` + `/${ user.id }`, {
           user: {
             name: user.name,
             username: user.username
           }
         })
-        console.log(resp);
         window.location.href = '/users';
       }
       catch (e) {
-        console.log(e)
       }
     }
   },
@@ -35,7 +33,6 @@ export default {
       this.user = resp.data
     }
     catch (e) {
-      console.log(e)
     }
   }
 }

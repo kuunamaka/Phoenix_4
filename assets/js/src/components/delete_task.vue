@@ -14,16 +14,14 @@ export default {
   methods: {
     async deleteTask(task) {
       try {
-        const resp = await axios.delete(`/api/tasks` + `/${ task.id }`, {
+        await axios.delete(`/api/tasks` + `/${ task.id }`, {
           task: {
             name: this.name
           }
         })
-        console.log(resp);
         window.location.href = '/tasks';
       }
       catch (e) {
-        console.log(e)
       }
     }
   },
@@ -34,7 +32,6 @@ export default {
       this.task = resp.data
     }
     catch (e) {
-      console.log(e)
     }
   }
 }

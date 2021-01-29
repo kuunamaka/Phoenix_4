@@ -24,17 +24,15 @@ export default {
   methods: {
     async createUser() {
       try {
-        const resp = await axios.post('/api/users', {
+        await axios.post('/api/users', {
           user: {
             name: this.name,
             username: this.username
           }
         })
-        console.log(resp);
         window.location.href = '/users';
       }
       catch (e) {
-        console.log(e)
       }
     }
   }

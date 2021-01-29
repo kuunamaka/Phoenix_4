@@ -41,18 +41,16 @@ export default {
   methods: {
     async createTask() {
       try {
-        const resp = await axios.post('/api/tasks', {
+        await axios.post('/api/tasks', {
           task: {
             name: this.name,
             is_finished: this.is_finished,
             assignee_id: this.assignee_id
           }
         })
-        console.log(resp);
         window.location.href = '/tasks';
       }
       catch (e) {
-        console.log(e)
       }
     }
   },
@@ -62,7 +60,6 @@ export default {
       this.tasks = resp.data.tasks
     }
     catch (e) {
-      console.log(e)
     }
   }
 }
