@@ -124,17 +124,12 @@ defmodule TodoTutorial.Todos do
   def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking task changes.
-
-  ## Examples
-
-      iex> change_task(task)
-      %Ecto.Changeset{data: %Task{}}
-
+  For changing task **puting values to editting-form
   """
   @spec change_task(%Task{}, %{}) :: Ecto.Changeset.t()
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
+    |> Repo.update()
   end
 
   @doc """

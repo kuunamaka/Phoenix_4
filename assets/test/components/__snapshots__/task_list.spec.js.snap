@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`task_list.vue is a Vue instance 1`] = `
+<table>
+  <h2>
+    Listing Tasks
+  </h2>
+    
+  <a
+    class="button"
+    href="/tasks/new"
+  >
+    Add task
+  </a>
+   
+  <a
+    class="button"
+    href="/users"
+  >
+    User
+  </a>
+</table>
+`;

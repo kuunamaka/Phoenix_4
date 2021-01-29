@@ -13,8 +13,10 @@ defmodule TodoTutorialWeb.Api.TaskController do
 
   def create(conn, %{"task" => task_params}) do
     with {:ok, %Task{} = task} <- Todos.create_task(task_params) do
+      id = task.id
+      task = Todos.get_task!(id)
+      IO.inspect(task)
       conn
-      # |> IO.inspect(task)
       |> put_status(:created)
       |> put_resp_header("location", Routes.api_task_path(conn, :show, task))
       |> render("show.json", task: task)
@@ -23,6 +25,11 @@ defmodule TodoTutorialWeb.Api.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
+    render(conn, "show.json", task: task)
+  end
+
+  def edit(conn, %{"task" => task_params}) do
+    task = Todos.change_task(task_params)
     render(conn, "show.json", task: task)
   end
 

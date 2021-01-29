@@ -1,5 +1,27 @@
+describe('deleteUser()', () => {
+  it('delete user and redirect to the correct path', async () => {
+    const deleteButton = wrapper.find('button');
+    await deleteButton.trigger('click');
+
+    expect(deleteButton.text()).toEqual('delete');
+    expect(window.location.href).toEqual('/users');
+  })
+});
+
+# terminal/ console
+*Deleting     ctrl a + k
+*At the end   ctrl e
+*forward      ctrl f
+*back         ctrl b
+
 # the directories
 ~/Phoenix_4   
+
+# dockerの中に入る
+$ docker-compose run app bash
+## yarn test
+cd assets
+yran test
 
 # command
 `docker-compose run app iex -S mix phx.server`   
@@ -10,6 +32,20 @@
 `docker-compose run app mix ecto.reset`   
 
 `mix test test/todo_tutorial/todo_test.exs`   
+
+# async使ってjestでテストするとき
+.babelrc
+{
+    "presets": [
+        [
+            "@babel/preset-env", {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ]
+    ]
+}
 
 # vscodeのファイル編集権限をuserにするとき
 `$ sudo chown -R [ユーザー名] ./`   
@@ -199,4 +235,16 @@ organisms...atoms, moleculesのコンポーネントを組み合わせて作成�
 <span><%= link "Add a new task", to: Routes.task_path(@conn, :new) %></span>
 <span> | </span>
 <span><%= link "See all the users", to: Routes.user_path(@conn, :index) %></span>
+```
+For selecting the assignee
+```html
+<div>
+  Assigned by:
+  <select v-model="selected">
+    <option disabled>Please select one</option>
+    <option v-for="task in tasks" :key="task.id">
+      {{ task.assignee_id }}
+    </option>
+  </select>
+</div>
 ```

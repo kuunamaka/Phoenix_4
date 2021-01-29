@@ -3,11 +3,11 @@ defmodule TodoTutorialWeb.Api.UserView do
   alias TodoTutorialWeb.Api.UserView
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, __MODULE__, "user.json")}
+    %{users: render_many(users, __MODULE__, "user.json")}
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, __MODULE__, "user.json")}
+    render_one(user, __MODULE__, "user.json")
   end
 
   def render("user.json", %{user: user}) do

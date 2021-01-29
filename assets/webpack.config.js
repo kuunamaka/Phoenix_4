@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = (env, options) => {
+  console.log(__dirname)
   const devMode = options.mode !== 'production';
 
   return {
@@ -53,6 +54,7 @@ module.exports = (env, options) => {
       extensions: ['.js', '.vue', '.json'],
       alias: {
         vue$: 'vue/dist/vue.esm.js',
+        "@": path.resolve(__dirname, "./js")
       }
     },
     plugins: [

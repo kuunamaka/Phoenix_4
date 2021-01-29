@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit_task.vue is a Vue instance 1`] = `
+<table>
+  <div>
+    <h2>
+      Updating Task
+    </h2>
+     
+    <div>
+      
+      Name
+      
+      <input />
+    </div>
+     
+    <div>
+      
+      Assigned by:
+      
+      <select>
+        <option
+          disabled="disabled"
+        >
+          Please select one
+        </option>
+         
+        <option>
+          
+          1
+        
+        </option>
+      </select>
+    </div>
+     
+    <div>
+      
+      Has finished?
+      
+      <input
+        id="is_finished"
+        type="checkbox"
+      />
+    </div>
+     
+    <button>
+      Submit
+    </button>
+     
+    <a
+      class="button"
+      href="/tasks"
+    >
+      Exit
+    </a>
+  </div>
+   
+  <delete-task-stub />
+</table>
+`;

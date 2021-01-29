@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit_user.vue is a Vue instance 1`] = `
+<table>
+  <div>
+    <h2>
+      Updating User
+    </h2>
+     
+    <p>
+      * User id won't be able to change
+    </p>
+     
+    <input
+      placeholder="new name"
+    />
+     
+    <input
+      placeholder="new username"
+    />
+  </div>
+   
+  <br />
+   
+  <button>
+    Submit
+  </button>
+   
+  <a
+    class="button"
+    href="/users"
+  >
+    Exit
+  </a>
+   
+  <div>
+    <delete-user-stub />
+  </div>
+</table>
+`;

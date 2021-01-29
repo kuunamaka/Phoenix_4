@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add_user.vue is a Vue instance 1`] = `
+<table>
+  <h2>
+    Adding Users
+  </h2>
+   
+  <div>
+    <input
+      placeholder="Name"
+    />
+     
+    <input
+      placeholder="Username"
+    />
+  </div>
+   
+  <button>
+    Create User
+  </button>
+   
+  <a
+    class="button"
+    href="/users"
+  >
+    Exit
+  </a>
+</table>
+`;
