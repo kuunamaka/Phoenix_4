@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit_user.vue renders entire component correctly 1`] = `
+<table>
+  <div>
+    <h2>
+      Updating User
+    </h2>
+     
+    <h4>
+      * User id won't be able to change
+    </h4>
+     
+    <!---->
+     
+    <ul />
+     
+    <input
+      placeholder="new name"
+    />
+     
+    <input
+      placeholder="new username"
+    />
+  </div>
+   
+  <br />
+   
+  <button>
+    Submit
+  </button>
+   
+  <a
+    class="button"
+    href="/users"
+  >
+    Exit
+  </a>
+   
+  <div>
+    <delete-user-stub />
+  </div>
+</table>
+`;
+
+exports[`edit_user.vue updateUser() show validate error messages 1`] = `
+<p>
+  Please correct the following error(s):
+</p>
+`;

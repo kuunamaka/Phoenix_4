@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user_list.vue renders entire component correctly 1`] = `
+<table>
+  <h2>
+    Listing Users
+  </h2>
+   
+  <li>
+    
+    id: 
+    <b>
+      1
+    </b>
+    , name: 
+    <b>
+      Maui
+    </b>
+    , username: 
+    <b>
+      Kuunamaka
+    </b>
+     
+    <a
+      class="button"
+      href="/users/1"
+    >
+      Edit
+    </a>
+  </li>
+  <li>
+    
+    id: 
+    <b>
+      2
+    </b>
+    , name: 
+    <b>
+      Tasuku
+    </b>
+    , username: 
+    <b>
+      Kaleorani
+    </b>
+     
+    <a
+      class="button"
+      href="/users/2"
+    >
+      Edit
+    </a>
+  </li>
+   
+  <a
+    class="button"
+    href="/users/new"
+  >
+    Add User
+  </a>
+   
+  <a
+    class="button"
+    href="/tasks"
+  >
+    Task
+  </a>
+</table>
+`;

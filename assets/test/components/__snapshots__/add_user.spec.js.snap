@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add_user.vue createUser show validate error messages 1`] = `
+<p>
+  Please correct the following error(s):
+</p>
+`;
+
+exports[`add_user.vue renders entire component correctly 1`] = `
+<table>
+  <h2>
+    Adding Users
+  </h2>
+   
+  <!---->
+   
+  <ul />
+   
+  <div>
+    <input
+      name="Name"
+      placeholder="Name"
+    />
+     
+    <input
+      name="Username"
+      placeholder="Username"
+    />
+  </div>
+   
+  <button>
+    Create User
+  </button>
+   
+  <a
+    class="button"
+    href="/users"
+  >
+    Exit
+  </a>
+</table>
+`;

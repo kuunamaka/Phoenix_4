@@ -1,7 +1,5 @@
 defmodule TodoTutorialWeb.Router do
   use TodoTutorialWeb, :router
-  alias UserController
-  alias TaskController
   alias Task.FavoriteController
 
   pipeline :browser do
@@ -14,16 +12,25 @@ defmodule TodoTutorialWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/", TodoTutorialWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+
     resources "/users", UserController
-    resources "/tasks", TaskController do
-      resources "/favorited", FavoriteController, only: [:create, :delete]
-    end 
+
+    resources "/tasks", TaskController
+  end
+
+  scope "/api", TodoTutorialWeb, as: :api do
+    pipe_through :api
+
+    resources "/tasks", Api.TaskController do
+      resources "/users", Api.FavoriteController, only: [:create, :delete]
+    end
+    resources "/users", Api.UserController
   end
 
   # Other scopes may use custom stacks.

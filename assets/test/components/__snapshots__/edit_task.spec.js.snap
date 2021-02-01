@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit_task.vue renders entire component correctly 1`] = `
+<table>
+  <div>
+    <h2>
+      Updating Task
+    </h2>
+     
+    <!---->
+     
+    <ul />
+     
+    <div>
+      
+      Name
+      
+      <input />
+    </div>
+     
+    <div>
+      
+      Assigned by:
+      
+      <select>
+        <option
+          disabled="disabled"
+        >
+          Please select one
+        </option>
+         
+        <option>
+          
+          1
+        
+        </option>
+      </select>
+    </div>
+     
+    <div>
+      
+      Has finished?
+      
+      <input
+        id="is_finished"
+        type="checkbox"
+      />
+    </div>
+     
+    <button>
+      Submit
+    </button>
+     
+    <a
+      class="button"
+      href="/tasks"
+    >
+      Exit
+    </a>
+  </div>
+   
+  <delete-task-stub />
+</table>
+`;
+
+exports[`edit_task.vue updateTask() show validate error messages 1`] = `
+<p>
+  Please correct the following error(s):
+</p>
+`;

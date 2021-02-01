@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete_user.vue renders entire component correctly 1`] = `
+<button
+  class="delete"
+>
+  Delete
+</button>
+`;

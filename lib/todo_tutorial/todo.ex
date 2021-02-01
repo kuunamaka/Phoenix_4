@@ -124,17 +124,12 @@ defmodule TodoTutorial.Todos do
   def delete_task(%Task{} = task), do: Repo.delete(task)
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking task changes.
-
-  ## Examples
-
-      iex> change_task(task)
-      %Ecto.Changeset{data: %Task{}}
-
+  For changing task **puting values to editting-form
   """
   @spec change_task(%Task{}, %{}) :: Ecto.Changeset.t()
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)
+    |> Repo.update()
   end
 
   @doc """
@@ -198,18 +193,20 @@ defmodule TodoTutorial.Todos do
 
   @doc """
   Unliking the task
-
-  ## Examples
-
-      iex> delete_favorite_task(%{id: 1})
-      {:ok, %FavoritedTask{}}
-
-  id = a primary key
-
   """
-  @spec delete_favorite_task(FavoritedTask.t()) ::
+  @spec delete_favorite_task(integer, User.t()) ::
           {:ok, FavoritedTask.t()} | {:error, Ecto.Changeset.t()}
-  def delete_favorite_task(task) do
-    Repo.delete(%FavoritedTask{id: task.id})
+  def delete_favorite_task(task_id, user) do
+    favorited_task = Repo.one(FavoritedTask |> where(task_id: ^task_id, user_id: ^user.id))
+    Repo.delete(favorited_task)
+  end
+
+  @doc """
+  Checking whether the task was favored or not
+  """
+  def favorite_status(task) do
+    user = Accounts.get_user_by_name("Maui")
+    query = FavoritedTask |> where(task_id: ^task.id, user_id: ^user.id)
+    Repo.exists?(query)
   end
 end

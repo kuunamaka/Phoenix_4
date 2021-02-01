@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`add_task.vue renders entire component correctly 1`] = `
+<table>
+  <h2>
+    Adding Task
+  </h2>
+   
+  <div>
+    <!---->
+     
+    <ul />
+     
+    <div>
+      
+      Name
+      
+      <input />
+    </div>
+     
+    <div>
+      
+      Assigned by:
+      
+      <select>
+        <option
+          disabled="disabled"
+        >
+          Please select one
+        </option>
+         
+      </select>
+    </div>
+     
+    <div>
+      
+      Already finished?
+      
+      <input
+        id="is_finished"
+        type="checkbox"
+      />
+    </div>
+  </div>
+   
+  <button>
+    Submit
+  </button>
+   
+  <a
+    class="button"
+    href="/tasks"
+  >
+    Back
+  </a>
+</table>
+`;
+
+exports[`add_task.vue show validate error messages 1`] = `
+<p>
+  Please correct the following error(s):
+</p>
+`;
