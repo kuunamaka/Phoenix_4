@@ -1,12 +1,9 @@
-<!-- listing all tasks -->
-<!-- and feature for deleting the task -->
 <template>
   <table>
     <h2>Listing Tasks</h2>
     <li v-for="task in orderedTasks" :key="task.id">
       <b>{{ task.name }}</b> (by: <b>{{ task.assignee }}</b
-      >): (finished_at: <b>{{ task.finished_at }}</b
-      >,) Is_finished?: <b>{{ task.is_finished }}</b
+      >): Is_finished?: <b>{{ task.is_finished }}</b
       >,
       <button
         v-if="task.is_liked"
@@ -16,6 +13,7 @@
       <button v-else @click="createLike(task)" class="far fa-heart"></button>
       <b>{{ task.favorited_users.length }}</b
       >,
+      <a :href="`/tasks/${task.id}`" class="button">Detail</a>
       <a :href="`/tasks/${task.id}/edit`" class="button">Edit</a>
     </li>
     <a href="/tasks/new" class="button">Add task</a>
