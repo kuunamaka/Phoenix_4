@@ -7,6 +7,7 @@ import task_list from "./components/task_list";
 import add_task from "./components/add_task";
 import edit_task from "./components/edit_task";
 import delete_task from "./components/delete_task";
+import task_detail from "./components/task_detail";
 
 new Vue({
   el: "#app",
@@ -19,5 +20,6 @@ new Vue({
     add_task,
     edit_task,
     delete_task,
+    task_detail
   },
 });
