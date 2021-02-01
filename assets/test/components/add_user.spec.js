@@ -27,11 +27,20 @@ describe('add_user.vue', () => {
   describe('createUser', () => {
     it('redirect to /users', async () => {  
       mock.onPost("/api/users", {user: {name: "Test", username: "testtest"}}).reply(200);
-      await wrapper.setData({name: "Test", username: "testtest"})
+      await wrapper.setData({name: "Test", username: "testtest"});
         
-      await vm.createUser()    
+      await vm.createUser();
 
       expect(window.location.href).toEqual('/users');
+    });
+
+    it('show validate error messages', async () => {
+      mock.onPost("/api/users", {user: {name: "", username: ""}}).reply(404);
+      await wrapper.setData({name: "", username: ""});
+
+      await vm.createUser();
+
+      expect(wrapper.element).toMatchSnapshot();
     });
   });
 });

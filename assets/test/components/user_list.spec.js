@@ -12,9 +12,6 @@ mock.onGet("/api/users").reply(200, {
     {id: 2, name: "Tasuku", username: "Kaleorani"}
   ]
 });
-axios.get("/api/users").then(function(response) {
-  console.log(response.data.users)
-});
 
 window = Object.create(window);
 const pathname = '/users';

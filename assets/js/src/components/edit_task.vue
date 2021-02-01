@@ -3,6 +3,12 @@
   <table>
     <div>
       <h2>Updating Task</h2>
+      <p v-if = "errors.length">
+        Please correct the following error(s):
+        <ul>
+          <li v-for = "error in errors" :key="error" class = "error"> {{ error }}</li>
+        </ul>
+      </p>
       <div>
         Name
         <input v-model="name">
@@ -38,12 +44,13 @@ export default {
       name: '',
       assignee_id: null,
       is_finished: false,
-      task: ''
+      task: '',
+      errors: []
     }
   },
   methods: {
     async updateTask(task) {
-      try { 
+      if (this.name && this.assignee_id) { 
         await axios.put('/api/tasks' + `/${ task.id }`, {
           task: {
             name: this.name,
@@ -53,18 +60,21 @@ export default {
         })
         window.location.href = '/tasks';
       }
-      catch (e) {
+      
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push("Name required");
+      }
+      if (!this.assignee_id) {
+        this.errors.push("Assignee required");
       }
     },
   },
   async mounted() {
-    try {
-      const task_id = window.location.pathname.split('/')[2];
-      const resp = await axios.get('/api' + `/tasks/${ task_id }`)
-      this.task = resp.data
-    }
-    catch (e) {
-    }
+    const task_id = window.location.pathname.split('/')[2];
+    const resp = await axios.get('/api' + `/tasks/${ task_id }`)
+    this.task = resp.data
   }
 }
 </script>

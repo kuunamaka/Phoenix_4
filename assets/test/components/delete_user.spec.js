@@ -8,9 +8,6 @@ const mock = new  MockAdapter(axios);
 mock.onGet("/api/users/1").reply(200, {
     id: 1, name: "Test", username: "testtest"}
 );
-axios.get("/api/users/1").then(function(response) {
-  console.log(response.data)
-});
 
 global.window = Object.create(window);
 const pathname = '/users/1';

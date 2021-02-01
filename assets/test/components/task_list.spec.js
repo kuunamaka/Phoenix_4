@@ -12,9 +12,6 @@ mock.onGet("/api/tasks").reply(200, {
     {id: 2, name: "Assignee", assignee: "Test", is_finished: false, is_liked: false, assignee_id: 1}
   ]
 });
-axios.get("/api/tasks").then(function(response) {
-  console.log(response.data.tasks)
-});
 
 window = Object.create(window);
 const pathname = '/tasks';
@@ -55,7 +52,7 @@ describe('task_list.vue', () => {
 
   describe('deleteLike/1', () => {
     it('redirect to /tasks', async () => {  
-      mock.onPost("/api/tasks/1/users/1", {task: {id: 1, name: 'Test'}}).reply(200);
+      mock.onDelete("/api/tasks/1/users/1", {task: {id: 1, name: 'Test'}}).reply(200);
       await wrapper.setData({id: 1, name: 'Test'})
         
       await vm.deleteLike({id: 1, name: 'Test'})

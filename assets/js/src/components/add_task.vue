@@ -1,8 +1,13 @@
-<!-- adding a new task -->
 <template>
   <table>
     <h2>Adding Task</h2>
     <div>
+      <p v-if = "errors.length">
+        Please correct the following error(s):
+        <ul>
+          <li v-for = "error in errors" :key="error" class = "error"> {{ error }}</li>
+        </ul>
+      </p>
       <div>
         Name
         <input v-model="name">
@@ -35,12 +40,13 @@ export default {
       name: '',
       assignee_id: null,
       is_finished: false,
-      tasks: null
+      tasks: null,
+      errors: []
     }
   },
   methods: {
     async createTask() {
-      try {
+      if (this.name && this.assignee_id) {
         await axios.post('/api/tasks', {
           task: {
             name: this.name,
@@ -50,17 +56,20 @@ export default {
         })
         window.location.href = '/tasks';
       }
-      catch (e) {
+      
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push("Name required");
+      }
+      if (!this.assignee_id) {
+        this.errors.push("Assignee requied");
       }
     }
   },
   async mounted() {
-    try {
-      const resp = await axios.get('/api/tasks')
-      this.tasks = resp.data.tasks
-    }
-    catch (e) {
-    }
+    const resp = await axios.get('/api/tasks')
+    this.tasks = resp.data.tasks
   }
 }
 </script>

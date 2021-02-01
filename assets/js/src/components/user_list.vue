@@ -1,4 +1,3 @@
-<!-- listing all users --> <!-- and feature for deleting the user -->
 <template>
   <table>
     <h2>Listing Users</h2>
@@ -31,12 +30,8 @@ export default {
     }
   },
   async mounted() {
-    try {
-      const resp = await axios.get('/api/users')
-      this.users = resp.data.users
-    }
-    catch (e) {
-    }
+    const resp = await axios.get('/api/users')
+    this.users = resp.data.users
   }
 }
 </script>

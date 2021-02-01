@@ -13,26 +13,18 @@ export default {
   },
   methods: {
     async deleteTask(task) {
-      try {
-        await axios.delete(`/api/tasks` + `/${ task.id }`, {
-          task: {
-            name: this.name
-          }
-        })
-        window.location.href = '/tasks';
-      }
-      catch (e) {
-      }
+      await axios.delete(`/api/tasks` + `/${ task.id }`, {
+        task: {
+          name: this.name
+        }
+      })
+      window.location.href = '/tasks';
     }
   },
   async mounted() {
-    try {
-      const task_id = window.location.pathname.split('/')[2];
-      const resp = await axios.get('/api' + `/tasks/${ task_id }`)
-      this.task = resp.data
-    }
-    catch (e) {
-    }
+    const task_id = window.location.pathname.split('/')[2];
+    const resp = await axios.get('/api' + `/tasks/${ task_id }`)
+    this.task = resp.data
   }
 }
 </script>

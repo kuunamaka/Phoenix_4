@@ -1,13 +1,3 @@
-describe('deleteUser()', () => {
-  it('delete user and redirect to the correct path', async () => {
-    const deleteButton = wrapper.find('button');
-    await deleteButton.trigger('click');
-
-    expect(deleteButton.text()).toEqual('delete');
-    expect(window.location.href).toEqual('/users');
-  })
-});
-
 # terminal/ console
 *Deleting     ctrl a + k
 *At the end   ctrl e

@@ -7,6 +7,73 @@ exports[`add_task.vue is a Vue instance 1`] = `
   </h2>
    
   <div>
+    <!---->
+     
+    <div>
+      
+      Name
+      
+      <input />
+    </div>
+     
+    <div>
+      
+      Assigned by:
+      
+      <select>
+        <option
+          disabled="disabled"
+        >
+          Please select one
+        </option>
+         
+      </select>
+    </div>
+     
+    <div>
+      
+      Already finished?
+      
+      <input
+        id="is_finished"
+        type="checkbox"
+      />
+    </div>
+  </div>
+   
+  <button>
+    Submit
+  </button>
+   
+  <a
+    class="button"
+    href="/tasks"
+  >
+    Back
+  </a>
+</table>
+`;
+
+exports[`add_task.vue show validate error messages 1`] = `
+<table>
+  <h2>
+    Adding Task
+  </h2>
+   
+  <div>
+    <p>
+      
+      Please correct the following error(s):
+      
+      <ul>
+        <li
+          class="error"
+        >
+           Name required
+        </li>
+      </ul>
+    </p>
+     
     <div>
       
       Name

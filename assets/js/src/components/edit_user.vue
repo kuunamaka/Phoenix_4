@@ -1,9 +1,14 @@
-<!-- updating the user -->
 <template>
   <table>
     <div>
       <h2>Updating User</h2>
-      <p>* User id won't be able to change</p>
+      <h4>* User id won't be able to change</h4>
+      <p v-if = "errors.length">
+        Please correct the following error(s):
+        <ul>
+          <li v-for = "error in errors" :key="error" class = "error"> {{ error }}</li>
+        </ul>
+      </p>
       <input v-model="name" placeholder="new name">
       <input v-model="username" placeholder="new username">
     </div>
@@ -24,6 +29,7 @@ export default {
   components: {DeleteUser},
   data() {
     return {
+      errors: [],
       name: '',
       username: '',
       user: ''
@@ -31,7 +37,7 @@ export default {
   },
   methods: {
     async updateUser(user) {
-      try {
+      if (this.name && this.username) {
         await axios.put('/api/users' + `/${ user.id }`, {
           user: {
             name: this.name,
@@ -40,18 +46,21 @@ export default {
         })
         window.location.href = '/users';
       }
-      catch (e) {
+      
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push("Name required");
+      }
+      if (!this.username) {
+        this.errors.push("Username required");
       }
     }
   },
   async mounted() {
-    try {
-      const user_id = window.location.pathname.split('/')[2];
-      const resp = await axios.get('/api' + `/users/${ user_id }`)
-      this.user = resp.data
-    }
-    catch (e) {
-    }
+    const user_id = window.location.pathname.split('/')[2];
+    const resp = await axios.get('/api' + `/users/${ user_id }`)
+    this.user = resp.data
   }
 }
 </script>

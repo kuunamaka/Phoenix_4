@@ -34,4 +34,13 @@ describe('add_task.vue', () => {
       expect(window.location.href).toEqual('/tasks');
     });
   });
+
+  it('show validate error messages', async () => {
+    mock.onPost("/api/tasks", {task: {name: '', is_finished: false, assignee_id: 1}}).reply(404);
+    await wrapper.setData({name: '', is_finished: false, assignee_id: 1});
+
+    await vm.createTask();
+
+    expect(wrapper.element).toMatchSnapshot();
+  });
 });

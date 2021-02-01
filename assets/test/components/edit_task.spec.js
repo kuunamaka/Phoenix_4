@@ -8,9 +8,6 @@ const mock = new  MockAdapter(axios);
 mock.onGet("/api/tasks/1").reply(200, {
   id: 1, name: "Test", is_finished: false, assignee_id: 1}
 );
-axios.get("/api/tasks/1").then(function(response) {
-  console.log(response.data)
-});
 
 global.window = Object.create(window);
 const pathname = '/tasks/1';
@@ -38,6 +35,15 @@ describe('edit_task.vue', () => {
       await vm.updateTask({id: 1, name: 'updateTest', is_finished: false, assignee_id: 1})
 
       expect(window.location.href).toEqual('/tasks');
+    });
+
+    it('show validate error messages', async () => {
+      mock.onPut("/api/tasks/1", {task: {id: 1, name: '', is_finished: false, assignee_id: 1}}).reply(404);
+      await wrapper.setData({id: 1, name: '', is_finished: false, assignee_id: 1});
+  
+      await vm.updateTask({id: 1, name: '', is_finished: false, assignee_id: 1});
+  
+      expect(wrapper.element).toMatchSnapshot();
     });
   })
 })

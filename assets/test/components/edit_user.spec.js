@@ -8,9 +8,6 @@ const mock = new  MockAdapter(axios);
 mock.onGet("/api/users/1").reply(200, {
   id: 1, name: "Test", username: "testtest"}
 );
-axios.get("/api/users/1").then(function(response) {
-  console.log(response.data)
-});
 
 global.window = Object.create(window);
 const pathname = '/users/1';
@@ -38,6 +35,15 @@ describe('edit_user.vue', () => {
       await vm.updateUser({id: 1, name: 'newTest', username: 'newtesttest'})
 
       expect(window.location.href).toEqual('/users');
+    });
+
+    it('show validate error messages', async () => {
+      mock.onPut("/api/users/1", {user: {id: 1, name: '', username: ''}}).reply(404);
+      await wrapper.setData({id: 1, name: '', username: ''});
+  
+      await vm.updateUser({id: 1, name: '', username: ''});
+  
+      expect(wrapper.element).toMatchSnapshot();
     });
   })
 })

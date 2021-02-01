@@ -37,38 +37,27 @@ export default {
   },
   methods: {
     async createLike(task){
-      try {
-        await axios.post(`/api/tasks` + `/${ task.id }` + `/users`, {
-          task: {
-            name: this.name,
-            id: this.id
-          }
-        })
-        window.location.href = '/tasks';
-      }
-      catch (e) {
-      }
+      await axios.post(`/api/tasks` + `/${ task.id }` + `/users`, {
+        task: {
+          name: this.name,
+          id: this.id
+        }
+      })
+      window.location.href = '/tasks';
     },
     async deleteLike(task){
-      try {
-        await axios.delete(`/api/tasks` + `/${ task.id }` + `/users` + `/1`, {
-          task: {
-            name: this.name,
-            id: this.id
-          }
-        })
-        window.location.href = '/tasks';
-      }
-      catch (e) {
-      }
+      await axios.delete(`/api/tasks` + `/${ task.id }` + `/users` + `/1`, {
+        task: {
+          name: this.name,
+          id: this.id
+        }
+      })
+      window.location.href = '/tasks';
     }
   },  
   async mounted() {
-    try {
-      const resp = await axios.get('/api/tasks')
-      this.tasks = resp.data.tasks
-    } catch (e) {
-    }
+    const resp = await axios.get('/api/tasks')
+    this.tasks = resp.data.tasks
   }
 }
 </script>
