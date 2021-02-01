@@ -53,7 +53,6 @@ module.exports = (env, options) => {
         "@": path.resolve(__dirname, "./js"),
       },
     },
-    echo: {},
     plugins: [
       new MiniCssExtractPlugin({ filename: "../css/app.css" }),
       new CopyWebpackPlugin([{ from: "static/", to: "../" }]),
