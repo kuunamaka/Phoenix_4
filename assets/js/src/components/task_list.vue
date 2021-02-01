@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async createLike(task){
-      await axios.post(`/api/tasks` + `/${ task.id }` + `/users`, {
+      await axios.post(`/api/tasks/${ task.id }/users`, {
         task: {
           name: this.name,
           id: this.id
@@ -46,7 +46,7 @@ export default {
       window.location.href = '/tasks';
     },
     async deleteLike(task){
-      await axios.delete(`/api/tasks` + `/${ task.id }` + `/users` + `/1`, {
+      await axios.delete(`/api/tasks/${task.id}/users/1`, {
         task: {
           name: this.name,
           id: this.id

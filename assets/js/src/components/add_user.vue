@@ -29,24 +29,23 @@ export default {
   },
   methods: {
     async createUser() {
-      if (this.name && this.username) {
-        await axios.post('/api/users', {
-          user: {
-            name: this.name,
-            username: this.username
-          }
-        })
-        window.location.href = '/users';
-      }
-
       this.errors = [];
-
       if (!this.name) {
         this.errors.push("Name required");
       }
       if (!this.username) {
         this.errors.push("Username required");
       }
+      if (this.errors.length !== 0) {
+        return;
+      }
+      await axios.post('/api/users', {
+          user: {
+            name: this.name,
+            username: this.username
+          }
+        })
+      window.location.href = '/users';
     }
   }
 }

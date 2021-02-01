@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async deleteTask(task) {
-      await axios.delete(`/api/tasks` + `/${ task.id }`, {
+      await axios.delete(`/api/tasks/${ task.id }`, {
         task: {
           name: this.name
         }
@@ -23,7 +23,7 @@ export default {
   },
   async mounted() {
     const task_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get('/api' + `/tasks/${ task_id }`)
+    const resp = await axios.get(`/api/tasks/${ task_id }`)
     this.task = resp.data
   }
 }

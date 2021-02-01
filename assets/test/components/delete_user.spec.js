@@ -23,7 +23,7 @@ describe('delete_user.vue', () => {
   const wrapper = shallowMount(delete_user);
   const vm = wrapper.vm
     
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
   

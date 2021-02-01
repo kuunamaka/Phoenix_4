@@ -27,7 +27,7 @@ describe('task_list.vue', () => {
   const wrapper = shallowMount(task_list);
   const vm = wrapper.vm
 
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 

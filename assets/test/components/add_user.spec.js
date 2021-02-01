@@ -20,7 +20,7 @@ describe('add_user.vue', () => {
   const wrapper = shallowMount(add_user);
   const vm = wrapper.vm
   
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
@@ -38,9 +38,10 @@ describe('add_user.vue', () => {
       mock.onPost("/api/users", {user: {name: "", username: ""}}).reply(404);
       await wrapper.setData({name: "", username: ""});
 
-      await vm.createUser();
-
-      expect(wrapper.element).toMatchSnapshot();
+      const createButton = wrapper.find('button');
+      await createButton.trigger('click');
+      
+      expect(wrapper.find('p').element).toMatchSnapshot();
     });
   });
 });

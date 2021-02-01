@@ -42,58 +42,21 @@ exports[`edit_user.vue is a Vue instance 1`] = `
 `;
 
 exports[`edit_user.vue updateUser() show validate error messages 1`] = `
-<table>
-  <div>
-    <h2>
-      Updating User
-    </h2>
-     
-    <h4>
-      * User id won't be able to change
-    </h4>
-     
-    <p>
-      
+<p>
+  
       Please correct the following error(s):
       
-      <ul>
-        <li
-          class="error"
-        >
-           Name required
-        </li>
-        <li
-          class="error"
-        >
-           Username required
-        </li>
-      </ul>
-    </p>
-     
-    <input
-      placeholder="new name"
-    />
-     
-    <input
-      placeholder="new username"
-    />
-  </div>
-   
-  <br />
-   
-  <button>
-    Submit
-  </button>
-   
-  <a
-    class="button"
-    href="/users"
-  >
-    Exit
-  </a>
-   
-  <div>
-    <delete-user-stub />
-  </div>
-</table>
+  <ul>
+    <li
+      class="error"
+    >
+       Name required
+    </li>
+    <li
+      class="error"
+    >
+       Username required
+    </li>
+  </ul>
+</p>
 `;

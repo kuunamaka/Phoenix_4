@@ -20,7 +20,7 @@ describe('add_task.vue', () => {
   const wrapper = shallowMount(add_task);
   const vm = wrapper.vm
   
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
@@ -39,8 +39,9 @@ describe('add_task.vue', () => {
     mock.onPost("/api/tasks", {task: {name: '', is_finished: false, assignee_id: 1}}).reply(404);
     await wrapper.setData({name: '', is_finished: false, assignee_id: 1});
 
-    await vm.createTask();
+    const createButton = wrapper.find('button');
+    await createButton.trigger('click');
 
-    expect(wrapper.element).toMatchSnapshot();
+    expect(wrapper.find('p').element).toMatchSnapshot();
   });
 });

@@ -37,29 +37,28 @@ export default {
   },
   methods: {
     async updateUser(user) {
-      if (this.name && this.username) {
-        await axios.put('/api/users' + `/${ user.id }`, {
-          user: {
-            name: this.name,
-            username: this.username
-          }
-        })
-        window.location.href = '/users';
-      }
-      
       this.errors = [];
-
       if (!this.name) {
         this.errors.push("Name required");
       }
       if (!this.username) {
         this.errors.push("Username required");
       }
+      if (this.errors.length !== 0) {
+        return;
+      }
+      await axios.put(`/api/users/${ user.id }`, {
+          user: {
+            name: this.name,
+            username: this.username
+          }
+        })
+      window.location.href = '/users';
     }
   },
   async mounted() {
     const user_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get('/api' + `/users/${ user_id }`)
+    const resp = await axios.get(`/api/users/${ user_id }`)
     this.user = resp.data
   }
 }

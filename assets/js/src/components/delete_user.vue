@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async deleteUser(user) {
-      await axios.delete(`/api/users` + `/${ user.id }`, {
+      await axios.delete(`/api/users/${ user.id }`, {
         user: {
           name: user.name,
           username: user.username
@@ -24,7 +24,7 @@ export default {
   },
   async mounted() {
     const user_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get('/api' + `/users/${ user_id }`)
+    const resp = await axios.get(`/api/users/${ user_id }`)
     this.user = resp.data
   }
 }

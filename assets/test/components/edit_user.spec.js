@@ -23,7 +23,7 @@ describe('edit_user.vue', () => {
   const wrapper = shallowMount(edit_user);
   const vm = wrapper.vm
   
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
@@ -41,9 +41,10 @@ describe('edit_user.vue', () => {
       mock.onPut("/api/users/1", {user: {id: 1, name: '', username: ''}}).reply(404);
       await wrapper.setData({id: 1, name: '', username: ''});
   
-      await vm.updateUser({id: 1, name: '', username: ''});
+      const updateButton = wrapper.find('button');
+      await updateButton.trigger('click');
   
-      expect(wrapper.element).toMatchSnapshot();
+      expect(wrapper.find('p').element).toMatchSnapshot();
     });
   })
 })

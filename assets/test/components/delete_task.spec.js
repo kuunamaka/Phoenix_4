@@ -23,7 +23,7 @@ describe('delete_task.vue', () => {
   const wrapper = shallowMount(delete_task);
   const vm = wrapper.vm
     
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
   

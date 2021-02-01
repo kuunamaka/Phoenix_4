@@ -62,73 +62,16 @@ exports[`edit_task.vue is a Vue instance 1`] = `
 `;
 
 exports[`edit_task.vue updateTask() show validate error messages 1`] = `
-<table>
-  <div>
-    <h2>
-      Updating Task
-    </h2>
-     
-    <p>
-      
+<p>
+  
       Please correct the following error(s):
       
-      <ul>
-        <li
-          class="error"
-        >
-           Name required
-        </li>
-      </ul>
-    </p>
-     
-    <div>
-      
-      Name
-      
-      <input />
-    </div>
-     
-    <div>
-      
-      Assigned by:
-      
-      <select>
-        <option
-          disabled="disabled"
-        >
-          Please select one
-        </option>
-         
-        <option>
-          
-          1
-        
-        </option>
-      </select>
-    </div>
-     
-    <div>
-      
-      Has finished?
-      
-      <input
-        id="is_finished"
-        type="checkbox"
-      />
-    </div>
-     
-    <button>
-      Submit
-    </button>
-     
-    <a
-      class="button"
-      href="/tasks"
+  <ul>
+    <li
+      class="error"
     >
-      Exit
-    </a>
-  </div>
-   
-  <delete-task-stub />
-</table>
+       Name required
+    </li>
+  </ul>
+</p>
 `;

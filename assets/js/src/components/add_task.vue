@@ -46,25 +46,24 @@ export default {
   },
   methods: {
     async createTask() {
-      if (this.name && this.assignee_id) {
-        await axios.post('/api/tasks', {
-          task: {
-            name: this.name,
-            is_finished: this.is_finished,
-            assignee_id: this.assignee_id
-          }
-        })
-        window.location.href = '/tasks';
-      }
-      
       this.errors = [];
-
       if (!this.name) {
         this.errors.push("Name required");
       }
       if (!this.assignee_id) {
         this.errors.push("Assignee requied");
       }
+      if (this.errors.length !== 0) {
+        return;
+      }
+      await axios.post('/api/tasks', {
+          task: {
+            name: this.name,
+            is_finished: this.is_finished,
+            assignee_id: this.assignee_id
+          }
+        })
+      window.location.href = '/tasks';     
     }
   },
   async mounted() {

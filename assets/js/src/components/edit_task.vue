@@ -50,30 +50,29 @@ export default {
   },
   methods: {
     async updateTask(task) {
-      if (this.name && this.assignee_id) { 
-        await axios.put('/api/tasks' + `/${ task.id }`, {
-          task: {
-            name: this.name,
-            is_finished: this.is_finished,
-            assignee_id: this.assignee_id
-          }
-        })
-        window.location.href = '/tasks';
-      }
-      
       this.errors = [];
-
       if (!this.name) {
         this.errors.push("Name required");
       }
       if (!this.assignee_id) {
         this.errors.push("Assignee required");
       }
+      if (this.errors.length !== 0) {
+        return;
+      }
+      await axios.put(`/api/tasks/${ task.id }`, {
+          task: {
+            name: this.name,
+            is_finished: this.is_finished,
+            assignee_id: this.assignee_id
+          }
+        })
+      window.location.href = '/tasks';
     },
   },
   async mounted() {
     const task_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get('/api' + `/tasks/${ task_id }`)
+    const resp = await axios.get(`/api/tasks/${ task_id }`)
     this.task = resp.data
   }
 }

@@ -26,7 +26,7 @@ Object.defineProperty(window, 'location', {
 describe('user_list.vue', () => {
   const wrapper = shallowMount(user_list);
 
-  it('is a Vue instance', () => {
+  it('renders entire component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
