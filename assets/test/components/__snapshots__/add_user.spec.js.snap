@@ -2,31 +2,19 @@
 
 exports[`add_user.vue createUser show validate error messages 1`] = `
 <p>
-  
-    Please correct the following error(s):
-    
-  <ul>
-    <li
-      class="error"
-    >
-       Name required
-    </li>
-    <li
-      class="error"
-    >
-       Username required
-    </li>
-  </ul>
+  Please correct the following error(s):
 </p>
 `;
 
-exports[`add_user.vue is a Vue instance 1`] = `
+exports[`add_user.vue renders entire component correctly 1`] = `
 <table>
   <h2>
     Adding Users
   </h2>
    
   <!---->
+   
+  <ul />
    
   <div>
     <input

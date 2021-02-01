@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`add_task.vue is a Vue instance 1`] = `
+exports[`add_task.vue renders entire component correctly 1`] = `
 <table>
   <h2>
     Adding Task
@@ -8,6 +8,8 @@ exports[`add_task.vue is a Vue instance 1`] = `
    
   <div>
     <!---->
+     
+    <ul />
      
     <div>
       
@@ -56,15 +58,6 @@ exports[`add_task.vue is a Vue instance 1`] = `
 
 exports[`add_task.vue show validate error messages 1`] = `
 <p>
-  
-      Please correct the following error(s):
-      
-  <ul>
-    <li
-      class="error"
-    >
-       Name required
-    </li>
-  </ul>
+  Please correct the following error(s):
 </p>
 `;

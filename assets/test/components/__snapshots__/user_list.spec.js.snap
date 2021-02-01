@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`user_list.vue is a Vue instance 1`] = `
+exports[`user_list.vue renders entire component correctly 1`] = `
 <table>
   <h2>
     Listing Users
@@ -12,13 +12,11 @@ exports[`user_list.vue is a Vue instance 1`] = `
     <b>
       1
     </b>
-    ,
-    name: 
+    , name: 
     <b>
       Maui
     </b>
-    ,
-    username: 
+    , username: 
     <b>
       Kuunamaka
     </b>
@@ -36,13 +34,11 @@ exports[`user_list.vue is a Vue instance 1`] = `
     <b>
       2
     </b>
-    ,
-    name: 
+    , name: 
     <b>
       Tasuku
     </b>
-    ,
-    username: 
+    , username: 
     <b>
       Kaleorani
     </b>

@@ -3,29 +3,29 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'delete_user',
+  name: "delete_user",
   data() {
-    return{
-      user: ''
-    }
+    return {
+      user: "",
+    };
   },
   methods: {
     async deleteUser(user) {
-      await axios.delete(`/api/users/${ user.id }`, {
+      await axios.delete(`/api/users/${user.id}`, {
         user: {
           name: user.name,
-          username: user.username
-        }
-      })
-      window.location.href = '/users';
-    }
+          username: user.username,
+        },
+      });
+      window.location.href = "/users";
+    },
   },
   async mounted() {
-    const user_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get(`/api/users/${ user_id }`)
-    this.user = resp.data
-  }
-}
+    const user_id = window.location.pathname.split("/")[2];
+    const resp = await axios.get(`/api/users/${user_id}`);
+    this.user = resp.data;
+  },
+};
 </script>

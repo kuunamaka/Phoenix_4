@@ -3,15 +3,14 @@
   <table>
     <div>
       <h2>Updating Task</h2>
-      <p v-if = "errors.length">
-        Please correct the following error(s):
-        <ul>
-          <li v-for = "error in errors" :key="error" class = "error"> {{ error }}</li>
-        </ul>
-      </p>
+      <p v-if="errors.length">Please correct the following error(s):</p>
+
+      <ul>
+        <li v-for="error in errors" :key="error" class="error">{{ error }}</li>
+      </ul>
       <div>
         Name
-        <input v-model="name">
+        <input v-model="name" />
       </div>
       <div>
         Assigned by:
@@ -24,7 +23,7 @@
       </div>
       <div>
         Has finished?
-        <input type="checkbox" id="is_finished" v-model="is_finished">
+        <input type="checkbox" id="is_finished" v-model="is_finished" />
       </div>
       <button @click="updateTask(task)">Submit</button>
       <a href="/tasks" class="button">Exit</a>
@@ -34,19 +33,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-import DeleteTask from './delete_task';
+import axios from "axios";
+import DeleteTask from "./delete_task";
 export default {
-  name: 'edit_task',
+  name: "edit_task",
   components: { DeleteTask },
   data() {
     return {
-      name: '',
+      name: "",
       assignee_id: null,
       is_finished: false,
-      task: '',
-      errors: []
-    }
+      task: "",
+      errors: [],
+    };
   },
   methods: {
     async updateTask(task) {
@@ -60,20 +59,20 @@ export default {
       if (this.errors.length !== 0) {
         return;
       }
-      await axios.put(`/api/tasks/${ task.id }`, {
-          task: {
-            name: this.name,
-            is_finished: this.is_finished,
-            assignee_id: this.assignee_id
-          }
-        })
-      window.location.href = '/tasks';
+      await axios.put(`/api/tasks/${task.id}`, {
+        task: {
+          name: this.name,
+          is_finished: this.is_finished,
+          assignee_id: this.assignee_id,
+        },
+      });
+      window.location.href = "/tasks";
     },
   },
   async mounted() {
-    const task_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get(`/api/tasks/${ task_id }`)
-    this.task = resp.data
-  }
-}
+    const task_id = window.location.pathname.split("/")[2];
+    const resp = await axios.get(`/api/tasks/${task_id}`);
+    this.task = resp.data;
+  },
+};
 </script>

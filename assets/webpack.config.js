@@ -1,66 +1,63 @@
-const path = require('path');
-const glob = require('glob');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require("path");
+const glob = require("glob");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = (env, options) => {
-  console.log(__dirname)
-  const devMode = options.mode !== 'production';
+  console.log(__dirname);
+  const devMode = options.mode !== "production";
 
   return {
     optimization: {
       minimizer: [
         new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
+        new OptimizeCSSAssetsPlugin({}),
+      ],
     },
     entry: {
-      'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
+      app: glob.sync("./vendor/**/*.js").concat(["./js/app.js"]),
     },
     output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, '../priv/static/js'),
-      publicPath: './../js/'
+      filename: "[name].js",
+      path: path.resolve(__dirname, "../priv/static/js"),
+      publicPath: "./../js/",
     },
-    devtool: devMode ? 'eval-cheap-module-source-map' : undefined,
+    devtool: devMode ? "eval-cheap-module-source-map" : undefined,
     module: {
       rules: [
         {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
-          }
+            loader: "babel-loader",
+          },
         },
         {
           test: /\.[s]?css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'sass-loader',
-          ],
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
         },
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
-        }
-      ]
+          loader: "vue-loader",
+        },
+      ],
     },
     resolve: {
-      extensions: ['.js', '.vue', '.json'],
+      extensions: [".js", ".vue", ".json"],
       alias: {
-        vue$: 'vue/dist/vue.esm.js',
-        "@": path.resolve(__dirname, "./js")
-      }
+        vue$: "vue/dist/vue.esm.js",
+        "@": path.resolve(__dirname, "./js"),
+      },
     },
+    echo: {},
     plugins: [
-      new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-      new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
-      new VueLoaderPlugin()
-    ]
-  }
+      new MiniCssExtractPlugin({ filename: "../css/app.css" }),
+      new CopyWebpackPlugin([{ from: "static/", to: "../" }]),
+      new VueLoaderPlugin(),
+    ],
+  };
 };

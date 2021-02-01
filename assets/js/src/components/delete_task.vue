@@ -3,28 +3,28 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'delete_task',
+  name: "delete_task",
   data() {
     return {
-      task: ''
-    }
+      task: "",
+    };
   },
   methods: {
     async deleteTask(task) {
-      await axios.delete(`/api/tasks/${ task.id }`, {
+      await axios.delete(`/api/tasks/${task.id}`, {
         task: {
-          name: this.name
-        }
-      })
-      window.location.href = '/tasks';
-    }
+          name: this.name,
+        },
+      });
+      window.location.href = "/tasks";
+    },
   },
   async mounted() {
-    const task_id = window.location.pathname.split('/')[2];
-    const resp = await axios.get(`/api/tasks/${ task_id }`)
-    this.task = resp.data
-  }
-}
+    const task_id = window.location.pathname.split("/")[2];
+    const resp = await axios.get(`/api/tasks/${task_id}`);
+    this.task = resp.data;
+  },
+};
 </script>

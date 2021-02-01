@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`delete_task.vue is a Vue instance 1`] = `
+exports[`delete_task.vue renders entire component correctly 1`] = `
 <div>
   <button>
     Delete
