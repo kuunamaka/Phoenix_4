@@ -17,7 +17,7 @@ defmodule TodoTutorialWeb.Api.FavoriteController do
 
     conn
     |> put_status(:created)
-    |> render("empty.json")
+    |> render("task_favorite.json")
   end
 
   @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()
@@ -27,6 +27,6 @@ defmodule TodoTutorialWeb.Api.FavoriteController do
 
     conn
       |> put_status(:created)
-      |> render("empty.json")
+      |> render("task_favorite.json")
   end
 end
