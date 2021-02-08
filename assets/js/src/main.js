@@ -20,6 +20,6 @@ new Vue({
     add_task,
     edit_task,
     delete_task,
-    task_detail
+    task_detail,
   },
 });

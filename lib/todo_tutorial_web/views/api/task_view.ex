@@ -18,7 +18,8 @@ defmodule TodoTutorialWeb.Api.TaskView do
       finished_at: task.finished_at,
       favorited_users: render_many(task.favorited_users, TodoTutorialWeb.Api.FavoriteView, "empty.json", as: :favorited_users),
       is_liked: TodoTutorial.Todos.favorite_status(task),
-      assignee_id: task.assignee_id
+      assignee_id: task.assignee_id,
+      comment: render_many(task.comment, TodoTutorialWeb.Api.CommentView, "task_comment.json", as: :comment),
     }
   end
 end

@@ -6,7 +6,6 @@ defmodule TodoTutorialWeb.Api.FavoriteController do
   alias TodoTutorial.Todos
   alias TodoTutorial.Accounts
   alias TodoTutorial.Todos.FavoritedTask
-  alias TodoTutorial.Repo
 
   action_fallback TodoTutorialWeb.FallbackController
 

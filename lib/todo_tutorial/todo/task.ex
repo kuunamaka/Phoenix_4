@@ -16,6 +16,7 @@ defmodule TodoTutorial.Todos.Task do
     belongs_to :assignee, TodoTutorial.Accounts.User, foreign_key: :assignee_id
 
     many_to_many :favorited_users, TodoTutorial.Accounts.User, join_through: "favorited_tasks"
+    has_many :comment, TodoTutorial.Todos.Comment
 
     timestamps()
   end

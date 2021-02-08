@@ -9,6 +9,7 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Accounts
   alias TodoTutorial.Todos.Task
   alias TodoTutorial.Todos.FavoritedTask
+  alias TodoTutorial.Todos.Comment
 
   @doc """
   Returns a list of tasks.
@@ -22,7 +23,7 @@ defmodule TodoTutorial.Todos do
   @spec list_tasks :: Task.t()
   def list_tasks do
     Task
-    |> preload([:assignee, :favorited_users])
+    |> preload([:assignee, :favorited_users, :comment])
     |> Repo.all()
   end
 
@@ -43,7 +44,7 @@ defmodule TodoTutorial.Todos do
   @spec get_task!(integer) :: Task.t()
   def get_task!(id) do
     Task
-    |> preload([:assignee, :favorited_users])
+    |> preload([:assignee, :favorited_users, :comment])
     |> Repo.get!(id)
   end
 
@@ -209,4 +210,42 @@ defmodule TodoTutorial.Todos do
     query = FavoritedTask |> where(task_id: ^task.id, user_id: ^user.id)
     Repo.exists?(query)
   end
+
+  @doc """
+  list comments
+  """
+  def list_comments do
+    Comment
+    |> Repo.all()
+  end
+
+  @doc """
+  Get a single comment
+  """
+  def get_comment!(id) do
+    Repo.get!(Comment, id)
+  end
+
+  @doc """
+  Create a comment
+  """
+  def create_comment(attrs \\ %{}) do
+    %Comment{}
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Update a comment
+  """
+  def update_comment(%Comment{} = comment, attrs) do
+    comment
+    |> Comment.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Delete a comment
+  """
+  def delete_comment(%Comment{} = comment), do: Repo.delete(comment)
 end
