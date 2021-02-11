@@ -5,7 +5,6 @@ defmodule TodoTutorialWeb.Api.FavoriteController do
   use TodoTutorialWeb, :controller
   alias TodoTutorial.Todos
   alias TodoTutorial.Accounts
-  alias TodoTutorial.Todos.FavoritedTask
 
   action_fallback TodoTutorialWeb.FallbackController
 

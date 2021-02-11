@@ -29,7 +29,7 @@ defmodule TodoTutorialWeb.Router do
 
     resources "/tasks", Api.TaskController do
       resources "/users", Api.FavoriteController, only: [:create, :delete]
-      resources "/comments", Api.CommentController
+      resources "/comments", Api.CommentController, only: [:create, :delete, :index]
     end
     resources "/users", Api.UserController
   end

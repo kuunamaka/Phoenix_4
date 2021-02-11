@@ -30,6 +30,19 @@ describe("task_detail.vue", () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
+  describe("createLike/1", () => {
+    it("redirect to /tasks/${task.id}", async () => {
+      mock
+        .onPost("/api/tasks/1/users", { task: { id: 1, name: "Test" } })
+        .reply(200);
+      await wrapper.setData({ id: 1, name: "Test" });
+
+      await vm.createLike({ id: 1, name: "Test" });
+
+      expect(window.location.href).toEqual("/tasks/1");
+    });
+  });
+
   describe("deleteLike/1", () => {
     it("redirect to /tasks/${task.id}", async () => {
       mock

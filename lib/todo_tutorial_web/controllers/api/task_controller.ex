@@ -12,14 +12,20 @@ defmodule TodoTutorialWeb.Api.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
-    with {:ok, %Task{} = task} <- Todos.create_task(task_params) do
-      id = task.id
-      task = Todos.get_task!(id)
-      IO.inspect(task)
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.api_task_path(conn, :show, task))
-      |> render("show.json", task: task)
+     case Todos.create_task(task_params) do
+      {:ok, %Task{} = task} ->
+        id = task.id
+        task = Todos.get_task!(id)
+        IO.inspect(task)
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", Routes.api_task_path(conn, :show, task))
+        |> render("show.json", task: task)
+
+      {:error, _} ->
+        conn
+        |> put_status(:not_acceptable)
+        |> render("show.json")
     end
   end
 
@@ -36,16 +42,26 @@ defmodule TodoTutorialWeb.Api.TaskController do
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todos.get_task!(id)
 
-    with {:ok, %Task{} = task} <- Todos.update_task(task, task_params) do
-      render(conn, "show.json", task: task)
+    case Todos.update_task(task, task_params) do
+      {:ok, %Task{} = task} ->
+        render(conn, "show.json", task: task)
+      {:error, _} ->
+        conn
+        |> put_status(:not_acceptable)
+        |> render("show.json")
     end
   end
 
   def delete(conn, %{"id" => id}) do
     task = Todos.get_task!(id)
 
-    with {:ok, %Task{}} <- Todos.delete_task(task) do
-      send_resp(conn, :no_content, "")
+    case Todos.delete_task(task) do
+      {:ok, %Task{}} ->
+        send_resp(conn, :no_content, "")
+      {:error, _} ->
+        conn
+        |> put_status(:not_acceptable)
+        |> render("")
     end
   end
 end

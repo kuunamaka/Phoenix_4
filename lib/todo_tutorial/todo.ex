@@ -152,20 +152,6 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
-  A function that lists users as the alphabetical order by using ordered_users() private function
-
-  ## Examples
-      iex> list_alphabetical_ordered_users
-      %User{}
-  """
-  @spec list_alphabetical_ordered_users :: User.t()
-  def list_alphabetical_ordered_users do
-    User
-    |> ordered_users()
-    |> Repo.all()
-  end
-
-  @doc """
   Liking the task.
 
   ## Examples
@@ -205,6 +191,7 @@ defmodule TodoTutorial.Todos do
   @doc """
   Checking whether the task was favored or not
   """
+  @spec favorite_status(Task.t()) :: boolean()
   def favorite_status(task) do
     user = Accounts.get_user_by_name("Maui")
     query = FavoritedTask |> where(task_id: ^task.id, user_id: ^user.id)
@@ -214,14 +201,15 @@ defmodule TodoTutorial.Todos do
   @doc """
   list comments
   """
+  @spec list_comments :: Comment.t()
   def list_comments do
-    Comment
-    |> Repo.all()
+    Repo.all(Comment)
   end
 
   @doc """
   Get a single comment
   """
+  @spec get_comment!(integer) :: Comment.t()
   def get_comment!(id) do
     Repo.get!(Comment, id)
   end
@@ -229,6 +217,8 @@ defmodule TodoTutorial.Todos do
   @doc """
   Create a comment
   """
+  @spec create_comment(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
+          {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
   def create_comment(attrs \\ %{}) do
     %Comment{}
     |> Comment.changeset(attrs)
@@ -236,16 +226,8 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
-  Update a comment
-  """
-  def update_comment(%Comment{} = comment, attrs) do
-    comment
-    |> Comment.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
   Delete a comment
   """
+  @spec delete_comment(%Comment{}) :: {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
   def delete_comment(%Comment{} = comment), do: Repo.delete(comment)
 end
