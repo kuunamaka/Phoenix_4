@@ -152,6 +152,19 @@ defmodule TodoTutorial.Todos do
   end
 
   @doc """
+  A function that lists users as the alphabetical order by using ordered_users() private function
+  ## Examples
+      iex> list_alphabetical_ordered_users
+      %User{}
+  """
+  @spec list_alphabetical_ordered_users :: User.t()
+  def list_alphabetical_ordered_users do
+    User
+    |> ordered_users()
+    |> Repo.all()
+  end
+
+  @doc """
   Liking the task.
 
   ## Examples
@@ -228,6 +241,10 @@ defmodule TodoTutorial.Todos do
   @doc """
   Delete a comment
   """
-  @spec delete_comment(%Comment{}) :: {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
-  def delete_comment(%Comment{} = comment), do: Repo.delete(comment)
+  @spec delete_comment(integer) :: {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
+  def delete_comment(comment_id) do
+    comment_id
+    |> get_comment!()
+    |> Repo.delete()
+  end
 end

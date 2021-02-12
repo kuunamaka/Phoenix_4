@@ -1,10 +1,10 @@
 defmodule TodoTutorial.TodosTest do
-  use TodoTutorial.DataCase
+  use TodoTutorial.DataCase, async: true
   use ExUnit.Case, async: true
 
   alias TodoTutorial.Todos
   alias TodoTutorial.Todos.Task
-  alias TodoTutorial.Todos.Comment
+  # alias TodoTutorial.Todos.Comment
 
   describe "list_tasks/0, get_task!/1" do
     @valid_attrs %{
@@ -31,10 +31,7 @@ defmodule TodoTutorial.TodosTest do
     end
 
     def comment_fixture(attrs \\ %{}) do
-      { :ok, _ } =
-        attrs
-        |> Enum.into(@valid_comment)
-        |> Todos.create_comment()
+        Todos.create_comment(attrs)
     end
 
     test "list all tasks" do
@@ -86,22 +83,28 @@ defmodule TodoTutorial.TodosTest do
   end
 
   describe "list_comments/0" do
-    test "list all comments" do
-      comment = comment_fixture()
+    setup do
+      %{comment: comment_fixture(@valid_comment)}
+    end
+
+    test "list all comments", %{comment: comment} do
       assert Todos.list_comments == [comment]
     end
   end
 
   describe "get_comment!/1" do
-    test "get one comment" do
-      comment = comment_fixture(@valid_comment)
+    setup do
+      %{comment: comment_fixture(@valid_comment)}
+    end
+
+    test "get one comment by its id", %{comment: comment} do
       assert Todos.get_comment!(comment.id) == comment
     end
   end
 
   describe "create_comment/1" do
     test "with valid data" do
-      assert {:ok, _} = Todos.create_comment(@valid_comment)
+      assert {:ok, _changeset} = Todos.create_comment(@valid_comment)
     end
 
     test "with invalid data" do
@@ -110,9 +113,12 @@ defmodule TodoTutorial.TodosTest do
   end
 
   describe "delete_comment/1" do
-    test "delete the comment" do
-      comment = comment_fixture()
-      assert {:ok, %Comment{}} = Todos.delete_comment(comment)
+    setup do
+      %{comment: comment_fixture(@valid_comment)}
+    end
+
+    test "delete the comment", %{comment: comment} do
+      assert {:ok, _changeset} = Todos.delete_comment(comment.id)
     end
   end
 end
