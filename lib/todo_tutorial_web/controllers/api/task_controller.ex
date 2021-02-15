@@ -39,15 +39,10 @@ defmodule TodoTutorialWeb.Api.TaskController do
   @spec update(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todos.get_task!(id)
-
-    case Todos.update_task(task, task_params) do
-      {:ok, %Task{} = task} ->
-        render(conn, "show.json", task: task)
-      {:error, _} ->
-        conn
-        |> put_status(:not_acceptable)
-        |> render("show.json")
-    end
+    Todos.update_task(task, task_params)
+    conn
+    |> put_status(:created)
+    |> render("show.json", task: task)
   end
 
   @spec delete(Plug.Conn.t(), map()) :: Plug.Conn.t()

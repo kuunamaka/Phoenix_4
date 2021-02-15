@@ -104,7 +104,7 @@ defmodule TodoTutorial.Todos do
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
-    |> Repo.update()
+    |> Repo.update!()
   end
 
   @doc """

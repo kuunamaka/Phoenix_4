@@ -16,7 +16,7 @@
         <select v-model="assignee_id">
           <option disabled>Please select one</option>
           <option>
-            {{ task.assignee }}
+            {{ task.assignee_id }}
           </option>
         </select>
       </div>
