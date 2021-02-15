@@ -26,7 +26,7 @@ exports[`add_task.vue renders entire component correctly 1`] = `
         <option
           disabled="disabled"
         >
-          Please select one
+          Please select one from
         </option>
          
       </select>

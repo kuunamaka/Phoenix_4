@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`task_detail.vue createComment show validate error messages 1`] = `undefined`;
+
+exports[`task_detail.vue renders entire component correctly 1`] = `<!---->`;

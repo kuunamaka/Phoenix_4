@@ -9,6 +9,7 @@ defmodule TodoTutorial.Todos do
   alias TodoTutorial.Accounts
   alias TodoTutorial.Todos.Task
   alias TodoTutorial.Todos.FavoritedTask
+  alias TodoTutorial.Todos.Comment
 
   @doc """
   Returns a list of tasks.
@@ -22,7 +23,7 @@ defmodule TodoTutorial.Todos do
   @spec list_tasks :: Task.t()
   def list_tasks do
     Task
-    |> preload([:assignee, :favorited_users])
+    |> preload([:assignee, :favorited_users, :comment])
     |> Repo.all()
   end
 
@@ -43,7 +44,7 @@ defmodule TodoTutorial.Todos do
   @spec get_task!(integer) :: Task.t()
   def get_task!(id) do
     Task
-    |> preload([:assignee, :favorited_users])
+    |> preload([:assignee, :favorited_users, :comment])
     |> Repo.get!(id)
   end
 
@@ -74,16 +75,14 @@ defmodule TodoTutorial.Todos do
       iex> create_task(%{field: value})
       {:ok, %Task{}}
 
-      iex> create_task(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
-  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
-          {:ok, Task.t()} | {:error, Ecto.Changeset.t()}
+  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
+  ) :: Task.t()
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Repo.preload([:assignee, :favorited_users, :comment])
   end
 
   @doc """
@@ -105,7 +104,7 @@ defmodule TodoTutorial.Todos do
   def update_task(%Task{} = task, attrs) do
     task
     |> Task.changeset(attrs)
-    |> Repo.update()
+    |> Repo.update!()
   end
 
   @doc """
@@ -152,7 +151,6 @@ defmodule TodoTutorial.Todos do
 
   @doc """
   A function that lists users as the alphabetical order by using ordered_users() private function
-
   ## Examples
       iex> list_alphabetical_ordered_users
       %User{}
@@ -204,9 +202,47 @@ defmodule TodoTutorial.Todos do
   @doc """
   Checking whether the task was favored or not
   """
+  @spec favorite_status(Task.t()) :: boolean()
   def favorite_status(task) do
     user = Accounts.get_user_by_name("Maui")
     query = FavoritedTask |> where(task_id: ^task.id, user_id: ^user.id)
     Repo.exists?(query)
+  end
+
+  @doc """
+  list comments
+  """
+  @spec list_comments :: Comment.t()
+  def list_comments do
+    Repo.all(Comment)
+  end
+
+  @doc """
+  Get a single comment
+  """
+  @spec get_comment!(integer) :: Comment.t()
+  def get_comment!(id) do
+    Repo.get!(Comment, id)
+  end
+
+  @doc """
+  Create a comment
+  """
+  @spec create_comment(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
+          {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
+  def create_comment(attrs \\ %{}) do
+    %Comment{}
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Delete a comment
+  """
+  @spec delete_comment(integer) :: {:ok, Comment.t()} | {:error, Ecto.Changeset.t()}
+  def delete_comment(comment_id) do
+    comment_id
+    |> get_comment!()
+    |> Repo.delete()
   end
 end

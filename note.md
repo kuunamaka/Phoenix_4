@@ -21,7 +21,7 @@ yran test
 
 `docker-compose run app mix ecto.reset`   
 
-`mix test test/todo_tutorial/todo_test.exs`   
+`docker-compose run app mix test test/todo_tutorial/todo_test.exs`   
 
 # async使ってjestでテストするとき
 .babelrc
@@ -237,4 +237,28 @@ For selecting the assignee
     </option>
   </select>
 </div>
+```
+
+## Comment feature test writing
+```js
+// comment_controller.ex
+  def edit(conn, %{"comment" => comment_params}) do
+    comment = Todos.update_comment(comment_params)
+    render(conn, "task_comment.json", comment: comment)
+  end
+
+  def update(conn, %{"id" => id, "comment" => comment_params}) do
+    comment = Todos.get_comment!(id)
+
+    case Todos.update_comment(comment, comment_params) do
+      {:ok, %Comment{} = comment} ->
+        render(conn, "task_comment.json", comment: comment)
+
+      {:eroor, _} ->
+        conn
+          |> put_status(:not_acceptable)
+          |> render("task_comment.json")
+    end
+  end
+
 ```

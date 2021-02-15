@@ -31,7 +31,7 @@ exports[`edit_task.vue renders entire component correctly 1`] = `
          
         <option>
           
-          1
+          
         
         </option>
       </select>

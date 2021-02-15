@@ -2,7 +2,7 @@
 $ cd ~/Phoenix_4   
 
 # 目的
-TodoTutorial確認用+user情報+いいね機能
+TodoTutorial確認用+user情報+いいね機能+コメント機能
 
 # TodoTutorial
 

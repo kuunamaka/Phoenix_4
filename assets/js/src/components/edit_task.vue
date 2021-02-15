@@ -1,4 +1,3 @@
-<!-- updating the task -->
 <template>
   <table>
     <div>

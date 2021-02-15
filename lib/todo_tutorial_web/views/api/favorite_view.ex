@@ -1,14 +1,13 @@
 defmodule TodoTutorialWeb.Api.FavoriteView do
   use TodoTutorialWeb, :view
 
-  def render("empty.json", _) do
+  def render("task_favorite.json", _) do
     %{}
   end
 
-  def render("empty.json", %{favorited_users: favorited_users}) do
+  def render("task_favorite.json", %{favorited_users: favorited_users}) do
     %{
-      id: favorited_users.id,
-      length: length(favorited_users)
+      id: favorited_users.id
     }
   end
 end
