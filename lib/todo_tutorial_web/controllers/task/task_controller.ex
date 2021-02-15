@@ -35,17 +35,10 @@ defmodule TodoTutorialWeb.TaskController do
   """
   @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"task" => task_params}) do
-    case Todos.create_task(task_params) do
-      {:ok, _} ->
+    task = Todos.create_task(task_params)
         conn
         |> put_flash(:info, "Task created successfully.")
         |> redirect(to: Routes.task_path(conn, :index))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        conn
-        |> put_flash(:error, "Couldn't create task")
-        |> render("new.html", changeset: changeset)
-    end
   end
 
   @doc """

@@ -29,7 +29,6 @@ defmodule TodoTutorialWeb.Task.FavoriteController do
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user_by_name("Maui")
     fav_task = Todos.get_fav_task!(id)
-    Todos.delete_favorite_task(fav_task)
 
     conn
     |> put_flash(:error, "Task unliked successfully.")

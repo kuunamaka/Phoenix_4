@@ -19,12 +19,16 @@
     <div v-if="errors.length">
       <p v-for="error in errors" :key="error" class="error">{{ error }}</p>
     </div>
-    <div>
-      Comment: <b>{{ task.comment }}</b>
+    Comment:
+    <div v-for="comment in orderedComment" :key="comment.id">
+      <b>{{ comment.body }}</b>
+      <button @click="deleteComment(comment)" class="fas fa-trash-alt" />
     </div>
     <div>
       <input v-model="comment" type="text" />
-      <button @click="createComment(comment)" class = "comment">Add Comment</button>
+      <button @click="createComment(comment)" class="comment">
+        Add Comment
+      </button>
     </div>
     <a href="/tasks" class="button">Exit</a>
   </table>
@@ -40,6 +44,11 @@ export default {
       comment: null,
       errors: [],
     };
+  },
+  computed: {
+    orderedComment: function () {
+      return _.orderBy(this.task.comment, "id");
+    },
   },
   methods: {
     async createLike(task) {
@@ -72,15 +81,23 @@ export default {
         comment: {
           body: this.comment,
           task_id: this.task.id,
-        }
+        },
+      });
+      window.location.href = `/tasks/${this.task.id}`;
+    },
+    async deleteComment(comment) {
+      await axios.delete(`/api/tasks/${this.task.id}/comments/${comment.id}`, {
+        comment: {
+          id: comment.id,
+        },
       });
       window.location.href = `/tasks/${this.task.id}`;
     },
   },
   async mounted() {
     const task_id = window.location.pathname.split("/")[2];
-    const resp = await axios.get(`/api/tasks/${task_id}`);
-    this.task = resp.data;
+    const { data } = await axios.get(`/api/tasks/${task_id}`);
+    this.task = data;
   },
 };
 </script>

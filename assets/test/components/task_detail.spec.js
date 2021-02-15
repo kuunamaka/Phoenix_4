@@ -62,12 +62,12 @@ describe("task_detail.vue", () => {
         .onPost("/api/tasks/1/comments", {
           comment: {
             body: "Test Comment",
-            task_id: 1
-          }
+            task_id: 1,
+          },
         })
         .reply(200);
       await wrapper.setData({ body: "Test Comment", task_id: 1 });
-      
+
       await vm.createComment({ body: "Test Comment", task_id: 1 });
 
       expect(window.location.href).toEqual("/tasks/1");
@@ -83,10 +83,28 @@ describe("task_detail.vue", () => {
         })
         .reply(404);
       await wrapper.setData({ body: "", task_id: 1 });
-  
+
       await vm.createComment();
-  
+
       expect(wrapper.find("p").element).toMatchSnapshot();
+    });
+  });
+
+  describe("deleteComment", () => {
+    it("redirect to /tasks/${task.id}", async () => {
+      mock
+        .onPost("/api/tasks/1/comments", {
+          comment: {
+            body: "Test Comment",
+            task_id: 1,
+          },
+        })
+        .reply(200);
+      await wrapper.setData({ body: "Test Comment", task_id: 1 });
+
+      await vm.deleteComment({ body: "Test Comment", task_id: 1 });
+
+      expect(window.location.href).toEqual("/tasks/1");
     });
   });
 });

@@ -75,16 +75,14 @@ defmodule TodoTutorial.Todos do
       iex> create_task(%{field: value})
       {:ok, %Task{}}
 
-      iex> create_task(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
-  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}) ::
-          {:ok, Task.t()} | {:error, Ecto.Changeset.t()}
+  @spec create_task(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any()}
+  ) :: Task.t()
   def create_task(attrs \\ %{}) do
     %Task{}
     |> Task.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert!()
+    |> Repo.preload([:assignee, :favorited_users, :comment])
   end
 
   @doc """

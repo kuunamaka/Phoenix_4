@@ -70,8 +70,8 @@ export default {
 <style lang="css">
 /* like */
 .fas {
-  background-color: #e0245e;
-  border-color: #e0245e;
+  background-color: #e91c48de;
+  border-color: #e91c48de;
 }
 /* unlike */
 .far {

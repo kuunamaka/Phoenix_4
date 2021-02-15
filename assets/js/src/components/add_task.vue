@@ -14,7 +14,7 @@
       <div>
         Assigned by:
         <select v-model="assignee_id">
-          <option disabled>Please select one</option>
+          <option disabled>Please select one from</option>
           <option v-for="task in tasks" :key="task.id">
             {{ task.assignee_id }}
           </option>

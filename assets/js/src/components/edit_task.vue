@@ -1,4 +1,3 @@
-<!-- updating the task -->
 <template>
   <table>
     <div>
@@ -17,7 +16,7 @@
         <select v-model="assignee_id">
           <option disabled>Please select one</option>
           <option>
-            {{ task.assignee_id }}
+            {{ task.assignee }}
           </option>
         </select>
       </div>

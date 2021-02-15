@@ -4,13 +4,15 @@ defmodule TodoTutorial.TodosTest do
 
   alias TodoTutorial.Todos
   alias TodoTutorial.Todos.Task
-  # alias TodoTutorial.Todos.Comment
 
   describe "list_tasks/0, get_task!/1" do
     @valid_attrs %{
       finished_at: ~N[2010-04-17 14:00:00],
       is_finished: true,
       name: "some name",
+      assignee: [],
+      favorited_users: [],
+      comment: []
     }
     @update_attrs %{
       finished_at: ~N[2011-05-18 15:01:01],
@@ -31,7 +33,12 @@ defmodule TodoTutorial.TodosTest do
     end
 
     def comment_fixture(attrs \\ %{}) do
-        Todos.create_comment(attrs)
+      { :ok, comment } =
+        attrs
+        |> Enum.into(@valid_comment)
+        |> Todos.create_comment()
+
+      comment
     end
 
     test "list all tasks" do
@@ -46,16 +53,12 @@ defmodule TodoTutorial.TodosTest do
   end
 
   describe "create_task/1" do
-    test "with valid data" do
+    test "with valid data and specified time" do
       now = %{NaiveDateTime.utc_now() | microsecond: {0, 0}}
-      assert {:ok, %Task{} = task} = Todos.create_task(@valid_attrs)
+      assert {:ok, _} = Todos.create_task(@valid_attrs)
       assert task.finished_at == now
       assert task.is_finished == true
       assert task.name == "some name"
-    end
-
-    test "with invalid data, returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Todos.create_task(@invalid_attrs)
     end
   end
 
